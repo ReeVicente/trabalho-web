@@ -13,7 +13,38 @@
 
     </head>
     <body>
-        <%=request.getUserPrincipal().toString()%>
+            <%@page import="java.sql.DriverManager"%>
+            <%@page import="java.sql.ResultSet"%>
+            <%@page import="java.sql.PreparedStatement"%>
+            <%@page import="java.sql.Connection"%>
+            <%@page import="br.ufscar.dc.dsw.JDBCUtil"%>
+            <%@page import="javax.sql.DataSource"%>
+            
+            <% 
+            ResultSet resultSet = null;
+
+            DataSource ds = JDBCUtil.getDataSource();
+
+            Connection conn = ds.getConnection();
+
+            String userSql = "SELECT * from Usuario where email = ?";
+
+            // Criando Usuario admin com papel ROLE_ADMIN
+            
+            PreparedStatement userStatement = conn.prepareStatement(userSql);
+            userStatement.setString(1, request.getUserPrincipal().getName().toString());
+            resultSet = userStatement.executeQuery();
+            resultSet.next();
+            
+            String nome = resultSet.getString("nome");
+            resultSet.close();
+            userStatement.close();
+            conn.close();
+            
+            %>
+            
+        
+   
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="#">Minha Bike</a>
@@ -27,12 +58,13 @@
                         <a class="nav-link" href="#">Minhas locações</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Alugar</a>
+                        <a class="nav-link" href="#">Meus dados</a>
                     </li>
                 </ul>
+                <span>Olá <%= nome %></span>
                 <ul class="navbar-nav">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Sair</a>
+                        <a class="nav-link" href="/LoginJSP/logout">Sair</a>
                     </li>
                 </ul>
 
@@ -44,6 +76,9 @@
             </div>
         </div>
         <main class="container">
+            <div class="d-flex justify-content-end mb-2">
+                <a href="/LoginJSP/admin/adicionar.jsp" class="btn btn-primary">Alugar</a>
+            </div>
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -75,6 +110,9 @@
                 </tbody>
             </table>
         </main>
+                <%
+                    
+                %>
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
