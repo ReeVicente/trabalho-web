@@ -11,8 +11,7 @@ CONSTRAINT Usuario_PK PRIMARY KEY (id)
 create table Papel (
 id integer not null generated always as identity (start with 1, increment by 1),
 email varchar(50) not null,
-nome varchar(50) not null,
-constraint Papel_PK PRIMARY KEY (id)
+nome varchar(50) not null
 );
 
 
@@ -21,7 +20,9 @@ create table Cliente (
     cpf varchar(11) not null unique,
     telefone varchar(11),
     sexo varchar(1),
-    data_nascimento date not null
+    data_nascimento date not null,
+    id_usuario integer unique not null,
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id)
     
 );
 
@@ -29,10 +30,15 @@ create table Locadora (
     id integer not null generated always as identity (start with 1, increment by 1),
     cnpj varchar(11) not null unique,
     cidade varchar(11),
-    
+    id_usuario integer unique not null,
+    FOREIGN KEY (id_usuario) REFERENCES Usuario(id)
 );
 
 create table Locacao (
     id integer not null generated always as identity (start with 1, increment by 1),
-    
-)
+    cpf varchar(11) not null unique,
+    cnpj varchar(11) not null unique,
+    data_locacao date not null,
+    FOREIGN KEY (cpf) REFERENCES Cliente(cpf),
+    FOREIGN KEY (cnpj) REFERENCES Locadora(cnpj)
+);

@@ -16,8 +16,8 @@ public class CriaUsuarios {
 
             Connection conn = ds.getConnection();
 
-            String userSql = "Insert into Usuario (email, senha, ativo) "
-                    + "values (?,?,?)";
+            String userSql = "Insert into Usuario (email, nome, senha, ativo) "
+                    + "values (?,?, ?, ?)";
 
             String roleSql = "Insert into Papel (email, nome)"
                     + "values (?,?)";
@@ -26,8 +26,9 @@ public class CriaUsuarios {
             
             PreparedStatement userStatement = conn.prepareStatement(userSql);
             userStatement.setString(1, "admin@admin");
-            userStatement.setString(2, encoder.encode("admin"));
-            userStatement.setBoolean(3, true);
+            userStatement.setString(2, "administrador");
+            userStatement.setString(3, encoder.encode("admin"));
+            userStatement.setBoolean(4, true);
             userStatement.execute();
 
             PreparedStatement roleStatement = conn.prepareStatement(roleSql);
@@ -38,8 +39,9 @@ public class CriaUsuarios {
             // Criando Usuario user com papel ROLE_USER
             userStatement = conn.prepareStatement(userSql);
             userStatement.setString(1, "user@user");
-            userStatement.setString(2, encoder.encode("user"));
-            userStatement.setBoolean(3, true);
+            userStatement.setString(2, "usuario");
+            userStatement.setString(3, encoder.encode("user"));
+            userStatement.setBoolean(4, true);
             userStatement.execute();
 
             roleStatement = conn.prepareStatement(roleSql);
