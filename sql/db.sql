@@ -35,4 +35,4 @@ create table Locadora (
 create table Locacao (
     id integer not null generated always as identity (start with 1, increment by 1),
     
-)
+);
