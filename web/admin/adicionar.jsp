@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html>
@@ -75,35 +76,75 @@
                 <h1>Adicionar Locadora</h1>
             </div>
         </div>
-        <main class="container my-3">
-            <div class="row d-flex justify-content-center">
-                <div class="col-6">
-                    <form>
-                        <div class="form-group">
-                            <label>Nome</label>
-                            <input class="form-control" placeholder="Nome">
-                        </div>
-                        <div class="form-group">
-                            <label>E-mail</label>
-                            <input class="form-control" placeholder="E-mail" type="email">
-                        </div>
-                        <div class="form-group">
-                            <label>CNPJ</label>
-                            <input class="form-control" placeholder="CNPJ">
-                        </div>
-                        <div class="form-group">
-                            <label>Senha</label>
-                            <input class="form-control" placeholder="Senha" type="password">
-                        </div>
-                        <div class="form-group">
-                            <label>Confirmar Senha</label>
-                            <input class="form-control" placeholder="Senha" type="password">
-                        </div>
-                        <button class="btn btn-primary">Enviar</button>
-                    </form>
-                </div>
-            </div>
-        </main>
+        <div align="center">
+        <c:if test="${locadora != null}">
+            <form action="atualizacao" method="post">
+            </c:if>
+            <c:if test="${locadora == null}">
+                <form action="insercao" method="post">
+                </c:if>
+                <table border="1" cellpadding="5">
+                    <caption>
+                        <h2>
+                            <c:if test="${locadora != null}">
+                                Edição
+                            </c:if>
+                            <c:if test="${locadora == null}">
+                                Cadastro
+                            </c:if>
+                        </h2>
+                    </caption>
+                    <c:if test="${locadora != null}">
+                        <input type="hidden" name="id" value="<c:out value='${locadora.id}' />" />
+                    </c:if>            
+                    <tr>
+                        <th>Nome: </th>
+                        <td>
+                            <input type="text" name="nome" size="45" required
+                                   value="<c:out value='${locadora.nome}' />"
+                                   />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>E-mail</th>
+                        <td>
+                            <input type="email" name="email" size="45" required
+                                   value="<c:out value='${locadora.email}' />"
+                                   />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Senha</th>
+                        <td>
+                            <input type="password" name="senha" size="45" required
+                                   value="<c:out value='${locadora.senha}' />"
+                                   />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Cnpj </th>
+                        <td>
+                            <input type="number" name="cnpj" size="5" required
+                                   min="1500" value="<c:out value='${locadora.cnpj}' />"
+                                   />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Cidade</th>
+                        <td>
+                            <input type="text" name="cidade" required 
+                                   value="<c:out value='${locadora.cidade}' />"
+                                   />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <input type="submit" value="Salva" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+    </div>
                 <%
                     
                 %>

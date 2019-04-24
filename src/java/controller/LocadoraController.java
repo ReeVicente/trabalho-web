@@ -1,10 +1,13 @@
 package controller;
 
+
 import model.Locadora;
 import dao.LocadoraDAO;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -56,6 +59,8 @@ public class LocadoraController extends HttpServlet {
             }
         } catch (RuntimeException | IOException | ServletException e) {
             throw new ServletException(e);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(LocadoraController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -82,8 +87,8 @@ public class LocadoraController extends HttpServlet {
         dispatcher.forward(request, response);
     }
 
-    private void insere(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+  private void insere(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException, ClassNotFoundException {
         request.setCharacterEncoding("UTF-8");
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");

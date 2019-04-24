@@ -4,9 +4,19 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Gustavo/Desktop/TrabalhoWeb/trabalho-web/src/java/controller/LocadoraController.java</file>
+            <file>file:/C:/Users/Gustavo/Desktop/TrabalhoWeb/trabalho-web/nbproject/build-impl.xml</file>
             <file>file:/C:/Users/Gustavo/Desktop/TrabalhoWeb/trabalho-web/src/java/model/Locadora.java</file>
-            <file>file:/C:/Users/Gustavo/Desktop/TrabalhoWeb/trabalho-web/src/java/dao/LocadoraDAO.java</file>
+            <file>file:/C:/Users/Gustavo/Desktop/TrabalhoWeb/trabalho-web/src/java/br/ufscar/dc/dsw/CriaUsuarios.java</file>
+            <file>file:/C:/Users/Gustavo/Desktop/TrabalhoWeb/trabalho-web/web/index.jsp</file>
+            <file>file:/C:/Users/Gustavo/Desktop/TrabalhoWeb/trabalho-web/web/admin/editar.jsp</file>
             <file>file:/C:/Users/Gustavo/Desktop/TrabalhoWeb/trabalho-web/sql/db.sql</file>
+            <file>file:/C:/Users/Gustavo/Desktop/TrabalhoWeb/trabalho-web/build/web/admin/admin.jsp</file>
+            <file>file:/C:/Users/Gustavo/Desktop/TrabalhoWeb/trabalho-web/src/java/br/ufscar/dc/dsw/AppSecurityInitializer.java</file>
+            <file>file:/C:/Users/Gustavo/Desktop/TrabalhoWeb/trabalho-web/src/java/dao/LocadoraDAO.java</file>
+            <file>file:/C:/Users/Gustavo/Desktop/TrabalhoWeb/trabalho-web/web/admin/admin.jsp</file>
+            <file>file:/C:/Users/Gustavo/Desktop/TrabalhoWeb/trabalho-web/src/java/br/ufscar/dc/dsw/AppConfig.java</file>
+            <file>file:/C:/Users/Gustavo/Desktop/TrabalhoWeb/trabalho-web/src/java/br/ufscar/dc/dsw/JDBCUtil.java</file>
+            <file>file:/C:/Users/Gustavo/Desktop/TrabalhoWeb/trabalho-web/web/admin/adicionar.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -1,6 +1,7 @@
 package dao;
 
 import model.Locadora;
+import br.ufscar.dc.dsw.JDBCUtil;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,6 +10,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.sql.DataSource;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class LocadoraDAO {
 
@@ -20,31 +23,48 @@ public class LocadoraDAO {
         }
     }
 
-    protected Connection getConnection() throws SQLException {
+    public Connection getConnection() throws SQLException {
         return DriverManager.getConnection("jdbc:derby://localhost:1527/Login", "root", "root");
     }
 
-    public void insert(Locadora locadora) {
-
-        String sql = "INSERT INTO Locadora (nome, email, senha, cnpj, cidade) VALUES (?, ?, ?, ?, ?)";
+    public void insert(Locadora locadora)  throws ClassNotFoundException   {
 
         try {
-            Connection conn = this.getConnection();
-            PreparedStatement statement = conn.prepareStatement(sql);;
 
-            statement = conn.prepareStatement(sql);
-            statement.setString(1, locadora.getNome());
-            statement.setString(2, locadora.getEmail());
-            statement.setString(3, locadora.getSenha());
-            statement.setString(4, locadora.getCnpj());
-            statement.setString(5, locadora.getCidade());
-            statement.executeUpdate();
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+             DataSource ds = JDBCUtil.getDataSource();
 
-            statement.close();
+            Connection conn = ds.getConnection();
+
+              String userSql = "Insert into Usuario (nome, email, senha, ativo) values (?,?, ?, ?)";
+
+            String roleSql = "Insert into Papel (email, nome) values (?,?)";
+
+            
+            PreparedStatement userStatement = conn.prepareStatement(userSql);
+            userStatement.setString(1, locadora.getNome());
+            userStatement.setString(2, locadora.getEmail());
+            userStatement.setString(3, encoder.encode(locadora.getSenha()));
+            userStatement.setBoolean(4, true);
+            userStatement.execute();
+            
+            userSql = "Insert into Locadora (cnpj, cidade) values (?, ?)";
+            
+            userStatement = conn.prepareStatement(userSql);
+            userStatement.setString(1, locadora.getCnpj());
+            userStatement.setString(2, locadora.getCidade());
+            userStatement.execute();
+            PreparedStatement roleStatement = conn.prepareStatement(roleSql);
+            roleStatement.setString(1, "user@user");
+            roleStatement.setString(2, "ROLE_USER");
+            roleStatement.execute();
+            roleStatement.close();
+            userStatement.close();
             conn.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+      
     }
 
     public List<Locadora> getAll() {
