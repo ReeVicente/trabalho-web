@@ -5,7 +5,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Locadora - Admin</title>
+        <title>Bem vindo ADM</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
         <!-- Bootstrap CSS -->
@@ -47,7 +47,7 @@
    
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/LoginJSP/admin/admin.jsp">Minha Bike</a>
+            <a class="navbar-brand" href="/LoginJSP/admin/admin.jsp">Menu Principal</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -55,10 +55,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Minhas </a>
+                        <a class="nav-link" href="/LoginJSP/admin/listaLocadoras.jsp">Locadoras</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Alugar</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/LoginJSP/admin/listaUsuarios.jsp">Usuários</a>
                     </li>
                 </ul>
                 <span>Olá <%= nome %></span>
@@ -72,36 +72,9 @@
         </nav>
         <div class="jumbotron">
             <div class="container">
-                <h1>Locadoras</h1>
+                <h1>Bem vindo ao controle de usuários</h1>
             </div>
         </div>
-        <main class="container">
-            <div class="d-flex justify-content-end mb-2">
-                <a href="/LoginJSP/admin/adicionar.jsp" class="btn btn-primary">Adicionar</a>
-            </div>
-            <div>
-                <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th scope="col">Locadora</th>
-                        <th scope="col">CNPJ</th>
-                        <th scope="col">Cidade</th>
-                        <th scope="col">Editar</th>
-                        <th scope="col">Apagar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Pedala Robinho</td>
-                        <td>24.651.742/0001-45</td>
-                        <td>São Carlos</td>
-                        <td><a href="/LoginJSP/admin/editar.jsp" class="btn btn-primary">Editar</a></td>
-                        <td><button class="btn btn-danger">Apagar</button></td>
-                    </tr>
-                </tbody>
-            </table>
-            </div>
-        </main>
                 <%
                     
                 %>

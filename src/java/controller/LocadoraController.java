@@ -68,7 +68,7 @@ public class LocadoraController extends HttpServlet {
             throws ServletException, IOException {
         List<Locadora> listaLocadoras = dao.getAll();
         request.setAttribute("listaLocadoras", listaLocadoras);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("locadora/lista.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/LoginJSP/admin.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -93,7 +93,7 @@ public class LocadoraController extends HttpServlet {
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
-        Integer cnpj = Integer.parseInt(request.getParameter("cnpj"));
+        String cnpj = request.getParameter("cnpj");
         String cidade = request.getParameter("cidade");
 
         Locadora locadora = new Locadora(nome, email, senha, cnpj, cidade);
@@ -109,7 +109,7 @@ public class LocadoraController extends HttpServlet {
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
-        Integer cnpj = Integer.parseInt(request.getParameter("cnpj"));
+        String cnpj = request.getParameter("cnpj");
         String cidade = request.getParameter("cidade");
 
         Locadora locadora = new Locadora(id, nome, email, senha, cnpj, cidade);

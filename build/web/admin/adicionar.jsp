@@ -78,7 +78,7 @@
         </div>
         <div align="center">
         <c:if test="${locadora != null}">
-            <form action="atualizacao" method="post">
+            <form action="insercao" method="post">
             </c:if>
             <c:if test="${locadora == null}">
                 <form action="insercao" method="post">
@@ -108,7 +108,7 @@
                     <tr>
                         <th>E-mail</th>
                         <td>
-                            <input type="email" name="email" size="45" required
+                            <input type="text" name="email" size="45" required
                                    value="<c:out value='${locadora.email}' />"
                                    />
                         </td>
@@ -116,7 +116,7 @@
                     <tr>
                         <th>Senha</th>
                         <td>
-                            <input type="password" name="senha" size="45" required
+                            <input type="text" name="senha" size="45" required
                                    value="<c:out value='${locadora.senha}' />"
                                    />
                         </td>
@@ -124,7 +124,7 @@
                     <tr>
                         <th>Cnpj </th>
                         <td>
-                            <input type="number" name="cnpj" size="5" required
+                            <input type="text" name="cnpj" size="5" required
                                    min="1500" value="<c:out value='${locadora.cnpj}' />"
                                    />
                         </td>
@@ -145,6 +145,14 @@
                 </table>
             </form>
     </div>
+                                   
+    <c:if test="${!empty requestScope.mensagens}">
+        <ul class="erro">
+            <c:forEach items="${requestScope.mensagens}" var="mensagem">
+                <li>${mensagem}</li>
+                </c:forEach>
+        </ul>
+    </c:if>
                 <%
                     
                 %>

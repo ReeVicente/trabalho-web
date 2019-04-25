@@ -29,42 +29,49 @@ public class LocadoraDAO {
 
     public void insert(Locadora locadora)  throws ClassNotFoundException   {
 
-        try {
+           try {
 
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-             DataSource ds = JDBCUtil.getDataSource();
+            DataSource ds = JDBCUtil.getDataSource();
 
             Connection conn = ds.getConnection();
 
-              String userSql = "Insert into Usuario (nome, email, senha, ativo) values (?,?, ?, ?)";
+            String userSql = "Insert into Usuario (email, nome, senha, ativo) "
+                    + "values (?,?, ?, ?)";
 
-            String roleSql = "Insert into Papel (email, nome) values (?,?)";
+            String roleSql = "Insert into Papel (email, nome)"
+                    + "values (?,?)";
 
+            // Criando Usuario admin com papel ROLE_ADMIN
             
             PreparedStatement userStatement = conn.prepareStatement(userSql);
-            userStatement.setString(1, locadora.getNome());
-            userStatement.setString(2, locadora.getEmail());
-            userStatement.setString(3, encoder.encode(locadora.getSenha()));
+            userStatement.setString(1, "admiro@admiro");
+            userStatement.setString(2, "administradore");
+            userStatement.setString(3, encoder.encode("admiro"));
             userStatement.setBoolean(4, true);
             userStatement.execute();
-            
-            userSql = "Insert into Locadora (cnpj, cidade) values (?, ?)";
-            
-            userStatement = conn.prepareStatement(userSql);
-            userStatement.setString(1, locadora.getCnpj());
-            userStatement.setString(2, locadora.getCidade());
-            userStatement.execute();
+
             PreparedStatement roleStatement = conn.prepareStatement(roleSql);
+            roleStatement.setString(1, "admin@admin");
+            roleStatement.setString(2, "ROLE_ADMIN");
+            roleStatement.execute();
+
+            // Criando Usuario user com papel ROLE_USER
+            userStatement = conn.prepareStatement(userSql);
+            userStatement.setString(1, "u@u");
+            userStatement.setString(2, "usu");
+            userStatement.setString(3, encoder.encode("usu"));
+            userStatement.setBoolean(4, true);
+            userStatement.execute();
+
+            roleStatement = conn.prepareStatement(roleSql);
             roleStatement.setString(1, "user@user");
             roleStatement.setString(2, "ROLE_USER");
             roleStatement.execute();
-            roleStatement.close();
-            userStatement.close();
-            conn.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-      
     }
 
     public List<Locadora> getAll() {
@@ -83,7 +90,7 @@ public class LocadoraDAO {
                 String nome = resultSet.getString("nome");
                 String email = resultSet.getString("email");
                 String senha = resultSet.getString("senha");
-                int cnpj = resultSet.getInt("cnpj");
+                String cnpj = resultSet.getString("cnpj");
                 String cidade = resultSet.getString("cidade");
                 Locadora locadora = new Locadora(id, nome, email, senha, cnpj, cidade);
                 listaLocadoras.add(locadora);
@@ -151,7 +158,7 @@ public class LocadoraDAO {
                 String nome = resultSet.getString("nome");
                 String email = resultSet.getString("email");
                 String senha = resultSet.getString("senha");
-                int cnpj = resultSet.getInt("cnpj");
+                String cnpj = resultSet.getString("cnpj");
                 String cidade = resultSet.getString("cidade");
                 locadora = new Locadora(id, nome, email, senha, cnpj, cidade);
             }
