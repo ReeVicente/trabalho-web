@@ -4,6 +4,7 @@ package controller;
 import model.Locadora;
 import dao.LocadoraDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = "/")
+@WebServlet(urlPatterns = "/locadora/*")
 public class LocadoraController extends HttpServlet {
 
     private LocadoraDAO dao;
@@ -27,41 +28,46 @@ public class LocadoraController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException {
-        doGet(request, response);
+            throws ServletException, IOException {
+        
+        String action = request.getPathInfo();
+        
+        try (PrintWriter out = response.getWriter()) {
+            try {   
+                switch (action) {
+                    case "/cadastro":
+                        apresentaFormCadastro(request, response);
+                        break;
+                    case "/insercao":
+                        insere(request, response);
+                        break;
+                    case "/remocao":
+                        remove(request, response);
+                        break;
+                    case "/edicao":
+                        apresentaFormEdicao(request, response);
+                        break;
+                    case "/atualizacao":
+                        atualize(request, response);
+                        break;
+                    default:
+                        lista(request, response);
+                        break;
+                }
+            } catch (RuntimeException | IOException | ServletException e) {
+                throw new ServletException(e);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(LocadoraController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException {
-        String action = request.getServletPath();
+            throws ServletException, IOException {
+        String action = request.getPathInfo();
 
-        try {
-            switch (action) {
-                case "/cadastro":
-                    apresentaFormCadastro(request, response);
-                    break;
-                case "/insercao":
-                    insere(request, response);
-                    break;
-                case "/remocao":
-                    remove(request, response);
-                    break;
-                case "/edicao":
-                    apresentaFormEdicao(request, response);
-                    break;
-                case "/atualizacao":
-                    atualize(request, response);
-                    break;
-                default:
-                    lista(request, response);
-                    break;
-            }
-        } catch (RuntimeException | IOException | ServletException e) {
-            throw new ServletException(e);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(LocadoraController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
     }
 
     private void lista(HttpServletRequest request, HttpServletResponse response)
@@ -89,7 +95,7 @@ public class LocadoraController extends HttpServlet {
 
   private void insere(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ClassNotFoundException {
-        request.setCharacterEncoding("UTF-8");
+            request.setCharacterEncoding("UTF-8");
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");

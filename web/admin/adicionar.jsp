@@ -81,8 +81,12 @@
             <form action="atualizacao" method="post">
             </c:if>
             <c:if test="${locadora == null}">
-                <form action="insercao" method="post">
+                <form action="/LoginJSP/locadora/insercao" method="post">
                 </c:if>
+                    
+                <input type="hidden"
+                name="${_csrf.parameterName}"
+                value="${_csrf.token}"/> 
                 <table border="1" cellpadding="5">
                     <caption>
                         <h2>
