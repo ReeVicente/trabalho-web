@@ -32,11 +32,11 @@ public class LocadoraDAO {
         try {
 
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-             DataSource ds = JDBCUtil.getDataSource();
+            DataSource ds = JDBCUtil.getDataSource();
 
             Connection conn = ds.getConnection();
 
-              String userSql = "Insert into Usuario (nome, email, senha, ativo) values (?,?, ?, ?)";
+            String userSql = "Insert into Usuario (nome, email, senha, ativo) values (?,?, ?, ?)";
 
             String roleSql = "Insert into Papel (email, nome) values (?,?)";
 
@@ -48,15 +48,16 @@ public class LocadoraDAO {
             userStatement.setBoolean(4, true);
             userStatement.execute();
             
-            userSql = "Insert into Locadora (cnpj, cidade) values (?, ?)";
+            userSql = "Insert into Locadora (cnpj, cidade, email) values (?, ?, ?)";
             
             userStatement = conn.prepareStatement(userSql);
             userStatement.setString(1, locadora.getCnpj());
             userStatement.setString(2, locadora.getCidade());
+            userStatement.setString(3, locadora.getEmail());
             userStatement.execute();
             PreparedStatement roleStatement = conn.prepareStatement(roleSql);
-            roleStatement.setString(1, "user@user");
-            roleStatement.setString(2, "ROLE_USER");
+            roleStatement.setString(1, locadora.getEmail());
+            roleStatement.setString(2, "ROLE_LOCADORA");
             roleStatement.execute();
             roleStatement.close();
             userStatement.close();
@@ -71,7 +72,7 @@ public class LocadoraDAO {
 
         List<Locadora> listaLocadoras = new ArrayList<>();
 
-        String sql = "SELECT * FROM Locadora";
+        String sql = "SELECT Locadora.*, Usuario.* FROM Locadora JOIN Usuario on Usuario.email = Locadora.email";
 
         try {
             Connection conn = this.getConnection();
@@ -82,10 +83,9 @@ public class LocadoraDAO {
                 int id = resultSet.getInt("id");
                 String nome = resultSet.getString("nome");
                 String email = resultSet.getString("email");
-                String senha = resultSet.getString("senha");
-                int cnpj = resultSet.getInt("cnpj");
+                String cnpj = resultSet.getString("cnpj");
                 String cidade = resultSet.getString("cidade");
-                Locadora locadora = new Locadora(id, nome, email, senha, cnpj, cidade);
+                Locadora locadora = new Locadora(id, nome, email, cnpj, cidade);
                 listaLocadoras.add(locadora);
             }
 
@@ -99,6 +99,8 @@ public class LocadoraDAO {
     }
 
     public void delete(Locadora locadora) {
+        Locadora loc = this.get(locadora.getId());
+        
         String sql = "DELETE FROM Locadora where id = ?";
 
         try {
@@ -113,21 +115,14 @@ public class LocadoraDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public void update(Locadora locadora) {
-        String sql = "UPDATE Locadora SET nome = ?, email = ?, senha = ?, cnpj = ?, cidade = ?";
-        sql += " WHERE id = ?";
+        
+        sql = "DELETE FROM Usuario where email = ?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-            statement.setString(1, locadora.getNome());
-            statement.setString(2, locadora.getEmail());
-            statement.setString(3, locadora.getSenha());
-            statement.setString(4, locadora.getCnpj());
-            statement.setString(5, locadora.getCidade());
+            statement.setString(1, loc.getEmail());
             statement.executeUpdate();
 
             statement.close();
@@ -135,11 +130,71 @@ public class LocadoraDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+       
+    }
+
+    public void update(Locadora locadora) {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        Locadora loc = this.get(locadora.getId());
+        
+        try {
+            String sql = "UPDATE Locadora SET cnpj = ?, cidade = ? WHERE id = ?";
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+    
+            statement.setString(1, locadora.getCnpj());
+            statement.setString(2, locadora.getCidade());
+            statement.setInt(3, loc.getId());
+            statement.execute();
+            
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if(!locadora.getSenha().isEmpty()) {
+            String sql = "UPDATE Usuario SET nome = ?, email = ?, senha = ? WHERE email = ?";
+            try {
+                Connection conn = this.getConnection();
+                PreparedStatement statement = conn.prepareStatement(sql);
+                statement.setString(1, locadora.getNome());
+                statement.setString(2, locadora.getEmail());
+                statement.setString(3, encoder.encode(locadora.getSenha()));
+                statement.setString(4, loc.getEmail());
+                statement.execute();
+            
+                statement.close();
+                conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            
+        } else {
+             String sql = "UPDATE Usuario SET nome = ?, email = ? WHERE email = ?";
+            try {
+                Connection conn = this.getConnection();
+                PreparedStatement statement = conn.prepareStatement(sql);
+                statement.setString(1, locadora.getNome());
+                statement.setString(2, locadora.getEmail());
+                statement.setString(3, loc.getEmail());
+                
+                statement.execute();
+            
+                statement.close();
+                conn.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+        }
+        
+        
     }
 
     public Locadora get(int id) {
         Locadora locadora = null;
-        String sql = "SELECT * FROM Locadora WHERE id = ?";
+        String sql = "SELECT Locadora.*, Usuario.* FROM Locadora JOIN Usuario on Usuario.email = Locadora.email WHERE Locadora.id = ?";
 
         try {
             Connection conn = this.getConnection();
@@ -151,7 +206,7 @@ public class LocadoraDAO {
                 String nome = resultSet.getString("nome");
                 String email = resultSet.getString("email");
                 String senha = resultSet.getString("senha");
-                int cnpj = resultSet.getInt("cnpj");
+                String cnpj = resultSet.getString("cnpj");
                 String cidade = resultSet.getString("cidade");
                 locadora = new Locadora(id, nome, email, senha, cnpj, cidade);
             }

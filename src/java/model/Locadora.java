@@ -8,13 +8,13 @@ public class Locadora {
     private String email;
     private String senha;
     private String cidade;
-    private int cnpj;
+    private String cnpj;
 
     public Locadora(Integer id) {
         this.id = id;
     }
 
-    public Locadora(String nome, String email, String senha, int cnpj, String cidade) {
+    public Locadora(String nome, String email, String cnpj, String cidade) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
@@ -22,9 +22,19 @@ public class Locadora {
         this.cidade = cidade;
 
     }
+    
+    public Locadora(String nome, String email, String senha, String cnpj, String cidade) {
+        this(nome, email, cnpj, cidade);
+        this.senha = senha;
+    }
 
-    public Locadora(Integer id, String nome, String email, String senha, int cnpj, String cidade) {
+    public Locadora(Integer id, String nome, String email, String senha, String cnpj, String cidade) {
         this(nome, email, senha, cnpj, cidade);
+        this.id = id;
+    }
+    
+    public Locadora(Integer id, String nome, String email, String cnpj, String cidade) {
+        this(nome, email, cnpj, cidade);
         this.id = id;
     }
 
@@ -61,10 +71,10 @@ public class Locadora {
     }
     
     public String getCnpj() {
-        return nome;
+        return this.cnpj;
     }
 
-    public void setCnpj(int cnpj) {
+    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
     

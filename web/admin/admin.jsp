@@ -1,4 +1,8 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.List"%>
+<%@page import="model.Locadora"%>
+<%@page import="dao.LocadoraDAO"%>
+<%@ page contentType="text/html; charset=UTF-8" %>
+
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
@@ -40,6 +44,11 @@
             resultSet.close();
             userStatement.close();
             conn.close();
+            
+            LocadoraDAO dao;
+            dao = new LocadoraDAO();
+
+            List<Locadora> listaLocadoras = dao.getAll();
             
             %>
             
@@ -91,13 +100,19 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Pedala Robinho</td>
-                        <td>24.651.742/0001-45</td>
-                        <td>São Carlos</td>
-                        <td><a href="/LoginJSP/admin/editar.jsp" class="btn btn-primary">Editar</a></td>
-                        <td><button class="btn btn-danger">Apagar</button></td>
-                    </tr>
+                       <% 
+                        for(int i = 0; i < listaLocadoras.size(); i++) {
+                       %>
+                        <tr>
+                            <td><%= listaLocadoras.get(i).getNome() %></td>
+                            <td><%= listaLocadoras.get(i).getCnpj()%></td>
+                            <td><%= listaLocadoras.get(i).getCidade()%></td>
+                            <td><a href="/LoginJSP/admin/editar.jsp?id=<%= listaLocadoras.get(i).getId()%>" class="btn btn-primary">Editar</a></td>
+                            <td><a href="/LoginJSP/locadora/remocao?id=<%= listaLocadoras.get(i).getId()%>" class="btn btn-danger">Apagar</a></td>
+                        </tr>
+                        <% } %>
+                    </c:forEach>
+
                 </tbody>
             </table>
             </div>
@@ -110,5 +125,6 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
     </body>
 </html>

@@ -35,17 +35,9 @@ public class LocadoraController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             try {   
                 switch (action) {
-                    case "/cadastro":
-                        apresentaFormCadastro(request, response);
-                        break;
                     case "/insercao":
+                        out.println(request.getParameter("email"));
                         insere(request, response);
-                        break;
-                    case "/remocao":
-                        remove(request, response);
-                        break;
-                    case "/edicao":
-                        apresentaFormEdicao(request, response);
                         break;
                     case "/atualizacao":
                         atualize(request, response);
@@ -66,30 +58,33 @@ public class LocadoraController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getPathInfo();
-
-       
+        
+        try (PrintWriter out = response.getWriter()) {
+            try {   
+                switch (action) {
+                    case "/remocao":
+                        remove(request, response);
+                        break;
+                    default:
+                        lista(request, response);
+                        break;
+                }
+            } catch (RuntimeException | IOException | ServletException e) {
+                throw new ServletException(e);
+            }
+        }
     }
 
     private void lista(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         List<Locadora> listaLocadoras = dao.getAll();
+        try (PrintWriter out = response.getWriter()) {
+           out.println(listaLocadoras.get(0).getEmail());
+        }
         request.setAttribute("listaLocadoras", listaLocadoras);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("locadora/lista.jsp");
-        dispatcher.forward(request, response);
-    }
-
-    private void apresentaFormCadastro(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        RequestDispatcher dispatcher = request.getRequestDispatcher("locadora/formulario.jsp");
-        dispatcher.forward(request, response);
-    }
-
-    private void apresentaFormEdicao(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        Locadora locadora = dao.get(id);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("locadora/formulario.jsp");
-        request.setAttribute("locadora", locadora);
+        
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/lista.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -99,12 +94,12 @@ public class LocadoraController extends HttpServlet {
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
-        Integer cnpj = Integer.parseInt(request.getParameter("cnpj"));
+        String cnpj = request.getParameter("cnpj");
         String cidade = request.getParameter("cidade");
 
         Locadora locadora = new Locadora(nome, email, senha, cnpj, cidade);
         dao.insert(locadora);
-        response.sendRedirect("lista");
+        response.sendRedirect("/LoginJSP/admin/admin.jsp");
     }
 
     private void atualize(HttpServletRequest request, HttpServletResponse response)
@@ -115,12 +110,14 @@ public class LocadoraController extends HttpServlet {
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
-        Integer cnpj = Integer.parseInt(request.getParameter("cnpj"));
+        String cnpj = request.getParameter("cnpj");
         String cidade = request.getParameter("cidade");
-
+        
         Locadora locadora = new Locadora(id, nome, email, senha, cnpj, cidade);
+
         dao.update(locadora);
-        response.sendRedirect("lista");
+        
+        response.sendRedirect("/LoginJSP/admin/admin.jsp");
     }
 
     private void remove(HttpServletRequest request, HttpServletResponse response)
@@ -129,6 +126,6 @@ public class LocadoraController extends HttpServlet {
 
         Locadora rent = new Locadora(id);
         dao.delete(rent);
-        response.sendRedirect("lista");
+        response.sendRedirect("/LoginJSP/admin/admin.jsp");
     }
 }

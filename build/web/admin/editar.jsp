@@ -1,5 +1,9 @@
+<%@page import="java.util.List"%>
+<%@page import="model.Locadora"%>
+<%@page import="dao.LocadoraDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
 <html>
@@ -41,10 +45,13 @@
             userStatement.close();
             conn.close();
             
-            %>
+            LocadoraDAO dao;
+            dao = new LocadoraDAO();
+
+            Locadora locadora = dao.get(Integer.parseInt(request.getParameter("id")));
             
-        
-   
+            %>
+              
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="/LoginJSP/admin/admin.jsp">Minha Bike</a>
@@ -75,42 +82,63 @@
                 <h1>Editar Locadora</h1>
             </div>
         </div>
-        <main class="container my-3">
-            <div class="row d-flex justify-content-center">
-                <div class="col-6">
-                    <form>
-                        <div class="form-group">
-                            <label>Nome</label>
-                            <input class="form-control" placeholder="Nome">
-                        </div>
-                        <div class="form-group">
-                            <label>E-mail</label>
-                            <input class="form-control" placeholder="E-mail" type="email">
-                        </div>
-                        <div class="form-group">
-                            <label>CNPJ</label>
-                            <input class="form-control" placeholder="CNPJ">
-                        </div>
-                        <div class="form-group">
-                            <label>Senha</label>
-                            <input class="form-control" placeholder="Senha" type="password">
-                        </div>
-                        <div class="form-group">
-                            <label>Confirmar Senha</label>
-                            <input class="form-control" placeholder="Senha" type="password">
-                        </div>
-                        <button class="btn btn-primary">Salvar</button>
-                    </form>
-                </div>
-            </div>
-        </main>
-                <%
+        <div align="center">
+      
+            <form id="form-insert" action="/LoginJSP/locadora/atualizacao" method="post">
                     
-                %>
+                <input type="hidden"
+                name="${_csrf.parameterName}"
+                value="${_csrf.token}"/> 
+                <table border="1" cellpadding="5">
+           
+                    <tr>
+                        <th>Nome: </th>
+                        <td>
+                            <input type="text" name="nome" required class="form-control" value="<%= locadora.getNome() %>" placeholder="Nome"/>
+                        </td>
+                    </tr>
+                    <input type="hidden" name="id" value="<%= locadora.getId()%>">
+                    <tr>
+                        <th>E-mail</th>
+                        <td>
+                            <input type="email" name="email" class="form-control" value="<%= locadora.getEmail()%>" required placeholder="E-mail">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Senha</th>
+                        <td>
+                            <input type="password" name="senha" class="form-control" placeholder="Senha" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>CNPJ </th>
+                        <td>
+                            <input type="text" class="form-control cnpj" name="cnpj" value="<%= locadora.getCnpj()%>" required placeholder="CNPJ" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Cidade</th>
+                        <td>
+                            <input type="text" class="form-control" name="cidade" value="<%= locadora.getCidade()%>" placeholder="Cidade" required />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <button class="btn btn-primary" type="submit" value="Salva">Editar</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+    </div>
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+       
+        <script> 
+            $('.cnpj').mask('00.000.000/0000-00', {reverse: true});
+        </script>
     </body>
 </html>
