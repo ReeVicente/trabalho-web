@@ -1,8 +1,8 @@
 package controller;
 
 
-import model.Locadora;
-import dao.LocadoraDAO;
+import model.Usuario;
+import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -16,14 +16,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = "/locadora/*")
-public class LocadoraController extends HttpServlet {
+@WebServlet(urlPatterns = "/user/*")
+public class UserController extends HttpServlet {
 
-    private LocadoraDAO dao;
+    private UserDAO dao;
 
     @Override
     public void init() {
-        dao = new LocadoraDAO();
+        dao = new UserDAO();
     }
 
     @Override
@@ -78,13 +78,13 @@ public class LocadoraController extends HttpServlet {
     private void lista(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        List<Locadora> listaLocadoras = dao.getAll();
+        List<Usuario> listaUsuarios = dao.getAll();
         try (PrintWriter out = response.getWriter()) {
-           out.println(listaLocadoras.get(0).getEmail());
+           out.println(listaUsuarios.get(0).getEmail());
         }
-        request.setAttribute("listaLocadoras", listaLocadoras);
+        request.setAttribute("listaUser", listaUsuarios);
         
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/lista.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/listaUser.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -94,12 +94,14 @@ public class LocadoraController extends HttpServlet {
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
-        String cnpj = request.getParameter("cnpj");
-        String cidade = request.getParameter("cidade");
+        String cpf = request.getParameter("cpf");
+        String telefone = request.getParameter("telefone");
+        String sexo = request.getParameter("sexo");
+        String datadenascimento = request.getParameter("datadenascimento");
 
-        Locadora locadora = new Locadora(nome, email, senha, cnpj, cidade);
-        dao.insert(locadora);
-        response.sendRedirect("/LoginJSP/admin/listaLocadoras.jsp");
+        Usuario user = new Usuario(nome, email, senha, cpf, telefone, sexo, datadenascimento);
+        dao.insert(user);
+        response.sendRedirect("/LoginJSP/admin/listaUser.jsp");
     }
 
     private void atualize(HttpServletRequest request, HttpServletResponse response)
@@ -110,22 +112,24 @@ public class LocadoraController extends HttpServlet {
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
         String senha = request.getParameter("senha");
-        String cnpj = request.getParameter("cnpj");
-        String cidade = request.getParameter("cidade");
+        String cpf = request.getParameter("cpf");
+        String telefone = request.getParameter("telefone");
+        String sexo = request.getParameter("sexo");
+        String datadenascimento = request.getParameter("datadenascimento");
         
-        Locadora locadora = new Locadora(id, nome, email, senha, cnpj, cidade);
+        Usuario user = new Usuario(id, nome, email, senha, cpf, telefone, sexo, datadenascimento);
 
-        dao.update(locadora);
+        dao.update(user);
         
-        response.sendRedirect("/LoginJSP/admin/listaLocadoras.jsp");
+        response.sendRedirect("/LoginJSP/admin/listaUser.jsp");
     }
 
     private void remove(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         int id = Integer.parseInt(request.getParameter("id"));
 
-        Locadora rent = new Locadora(id);
-        dao.delete(rent);
-        response.sendRedirect("/LoginJSP/admin/listaLocadoras.jsp");
+        Usuario usr = new Usuario(id);
+        dao.delete(usr);
+        response.sendRedirect("/LoginJSP/admin/listaUser.jsp");
     }
 }

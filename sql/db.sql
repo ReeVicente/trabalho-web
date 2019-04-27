@@ -20,7 +20,7 @@ create table Cliente (
     cpf varchar(11) not null unique,
     telefone varchar(11),
     sexo varchar(1),
-    data_nascimento date not null,
+    datadenascimento date not null,
     email varchar(50) not null,
     FOREIGN KEY (email) REFERENCES Usuario(email)
     

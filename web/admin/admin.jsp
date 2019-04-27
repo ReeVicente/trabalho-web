@@ -56,7 +56,7 @@
    
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/LoginJSP/admin/admin.jsp">Minha Bike</a>
+            <a class="navbar-brand" href="/LoginJSP/admin/admin.jsp">Menu iniciar</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -64,10 +64,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Minhas </a>
+                        <a class="nav-link" href="/LoginJSP/admin/listaLocadoras.jsp">Locadoras</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Alugar</a>
+                        <a class="nav-link" href="/LoginJSP/admin/listaUser.jsp">Usuários</a>
                     </li>
                 </ul>
                 <span>Olá <%= nome %></span>
@@ -81,42 +81,10 @@
         </nav>
         <div class="jumbotron">
             <div class="container">
-                <h1>Locadoras</h1>
+                <h1>Bem Vindo Administrador!</h1>
             </div>
         </div>
-        <main class="container">
-            <div class="d-flex justify-content-end mb-2">
-                <a href="/LoginJSP/admin/adicionar.jsp" class="btn btn-primary">Adicionar</a>
-            </div>
-            <div>
-                <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th scope="col">Locadora</th>
-                        <th scope="col">CNPJ</th>
-                        <th scope="col">Cidade</th>
-                        <th scope="col">Editar</th>
-                        <th scope="col">Apagar</th>
-                    </tr>
-                </thead>
-                <tbody>
-                       <% 
-                        for(int i = 0; i < listaLocadoras.size(); i++) {
-                       %>
-                        <tr>
-                            <td><%= listaLocadoras.get(i).getNome() %></td>
-                            <td><%= listaLocadoras.get(i).getCnpj()%></td>
-                            <td><%= listaLocadoras.get(i).getCidade()%></td>
-                            <td><a href="/LoginJSP/admin/editar.jsp?id=<%= listaLocadoras.get(i).getId()%>" class="btn btn-primary">Editar</a></td>
-                            <td><a href="/LoginJSP/locadora/remocao?id=<%= listaLocadoras.get(i).getId()%>" class="btn btn-danger">Apagar</a></td>
-                        </tr>
-                        <% } %>
-                    </c:forEach>
-
-                </tbody>
-            </table>
-            </div>
-        </main>
+        
                 <%
                     
                 %>
