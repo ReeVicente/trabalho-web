@@ -1,6 +1,6 @@
 <%@page import="java.util.List"%>
-<%@page import="model.Locadora"%>
-<%@page import="dao.LocadoraDAO"%>
+<%@page import="model.Usuario"%>
+<%@page import="dao.UserDAO"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
@@ -39,16 +39,17 @@
             userStatement.setString(1, request.getUserPrincipal().getName().toString());
             resultSet = userStatement.executeQuery();
             resultSet.next();
-            
+            int id = resultSet.getInt("id");
             String nome = resultSet.getString("nome");
+            String email = resultSet.getString("email");
             resultSet.close();
             userStatement.close();
             conn.close();
             
-            LocadoraDAO dao;
-            dao = new LocadoraDAO();
+            UserDAO dao;
+            dao = new UserDAO();
 
-            List<Locadora> listaLocadoras = dao.getAll();
+            List<Usuario> listaUser = dao.getAll();
             
             %>
             
@@ -56,7 +57,7 @@
    
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/LoginJSP/admin/admin.jsp">Minha Bike</a>
+            <a class="navbar-brand" href="/LoginJSP/user/user.jsp">Menu iniciar</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -64,9 +65,9 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Minhas </a>
+                        <a class="nav-link" href="/LoginJSP/user/editarUserbyUser.jsp?id=<%= id%>">Editar</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="#">Alugar</a>
                     </li>
                 </ul>
@@ -81,38 +82,28 @@
         </nav>
         <div class="jumbotron">
             <div class="container">
-                <h1>Locadoras</h1>
+                <h1>Minha conta</h1>
             </div>
         </div>
         <main class="container">
-            <div class="d-flex justify-content-end mb-2">
-                <a href="/LoginJSP/admin/adicionarLocadora.jsp" class="btn btn-primary">Adicionar</a>
-            </div>
             <div>
                 <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col">Locadora</th>
-                        <th scope="col">CNPJ</th>
-                        <th scope="col">Cidade</th>
+                        <th scope="col">Usuário</th>
+                        <th scope="col">E-mail</th>
                         <th scope="col">Editar</th>
                         <th scope="col">Apagar</th>
                     </tr>
                 </thead>
                 <tbody>
-                       <% 
-                        for(int i = 0; i < listaLocadoras.size(); i++) {
-                       %>
+                    
                         <tr>
-                            <td><%= listaLocadoras.get(i).getNome() %></td>
-                            <td><%= listaLocadoras.get(i).getCnpj()%></td>
-                            <td><%= listaLocadoras.get(i).getCidade()%></td>
-                            <td><a href="/LoginJSP/user/editar.jsp?id=<%= listaLocadoras.get(i).getId()%>" class="btn btn-primary">Editar</a></td>
-                            <td><a href="/LoginJSP/locadora/remocao?id=<%= listaLocadoras.get(i).getId()%>" class="btn btn-danger">Apagar</a></td>
+                            <td><%= nome %></td>
+                            <td><%= email %></td>
+                            <td><a href="/LoginJSP/user/editarUserbyUser.jsp?id=<%= id%>" class="btn btn-primary">Editar</a></td>
+                            <td><a href="#" class="btn btn-danger">Apagar</a></td>
                         </tr>
-                        <% } %>
-                    </c:forEach>
-
                 </tbody>
             </table>
             </div>

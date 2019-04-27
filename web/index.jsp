@@ -12,5 +12,8 @@
         <sec:authorize access="hasRole('USER')">
             <% response.sendRedirect("user/user.jsp"); %>
         </sec:authorize>
+         <sec:authorize access="hasRole('CLIENTE')">
+            <% response.sendRedirect("user/user.jsp"); %>
+        </sec:authorize>
     </body>
 </html>
