@@ -48,18 +48,19 @@ public class UserDAO {
             userStatement.setBoolean(4, true);
             userStatement.execute();
             
-            userSql = "Insert into Cliente (cpf, telefone, sexo, datadenascimento) values (?, ?, ?, ?)";
+            userSql = "Insert into Cliente (cpf, telefone, sexo, datadenascimento, email) values (?, ?, ?, ?, ?)";
             
             userStatement = conn.prepareStatement(userSql);
             userStatement.setString(1, cliente.getCpf());
             userStatement.setString(2, cliente.getTelefone());
             userStatement.setString(3, cliente.getSexo());
             userStatement.setString(4, cliente.getDatadenascimento());
+            userStatement.setString(5, cliente.getEmail());
             userStatement.execute();
             
             PreparedStatement roleStatement = conn.prepareStatement(roleSql);
             roleStatement.setString(1, cliente.getEmail());
-            roleStatement.setString(2, "ROLE_USER");
+            roleStatement.setString(2, "ROLE_CLIENTE");
             roleStatement.execute();
             roleStatement.close();
             userStatement.close();
@@ -72,7 +73,7 @@ public class UserDAO {
 
     public List<Usuario> getAll() {
 
-        List<Usuario> listaUsuarios = new ArrayList<>();
+        List<Usuario> listaUser = new ArrayList<>();
 
         String sql = "SELECT Cliente.*, Usuario.* FROM Cliente JOIN Usuario on Usuario.email = Cliente.email";
 
@@ -90,7 +91,7 @@ public class UserDAO {
                 String sexo = resultSet.getString("sexo");
                 String datadenascimento = resultSet.getString("datadenascimento");
                 Usuario user = new Usuario(id, nome, email, cpf, telefone, sexo, datadenascimento);
-                listaUsuarios.add(user);
+                listaUser.add(user);
             }
 
             resultSet.close();
@@ -99,7 +100,7 @@ public class UserDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return listaUsuarios;
+        return listaUser;
     }
 
     public void delete(Usuario user) {
@@ -146,8 +147,11 @@ public class UserDAO {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
-    
-            statement.setInt(1, usu.getId());
+            statement.setString(1, user.getCpf());
+            statement.setString(2, user.getTelefone());
+            statement.setString(3, user.getSexo());
+            statement.setString(4, user.getDatadenascimento());
+            statement.setInt(5, usu.getId());
             statement.execute();
             
             statement.close();
@@ -196,7 +200,7 @@ public class UserDAO {
 
     public Usuario get(int id) {
         Usuario user = null;
-        String sql = "SELECT Cliente.*, Usuario.* FROM Cliente JOIN Usuario on Usuario.email = Cliente.email";
+        String sql = "SELECT Cliente.*, Usuario.* FROM Cliente JOIN Usuario on Usuario.email = Cliente.email WHERE Cliente.id = ?";
 
         try {
             Connection conn = this.getConnection();

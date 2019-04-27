@@ -84,7 +84,7 @@ public class LocadoraController extends HttpServlet {
         }
         request.setAttribute("listaLocadoras", listaLocadoras);
         
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/lista.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/listaLocadoras.jsp");
         dispatcher.forward(request, response);
     }
 

@@ -66,7 +66,7 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="/LoginJSP/admin/listaLocadoras.jsp">Locadoras</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="/LoginJSP/admin/listaUser.jsp">Usuários</a>
                     </li>
                 </ul>
@@ -81,7 +81,7 @@
         </nav>
         <div class="jumbotron">
             <div class="container">
-                <h1>Locadoras</h1>
+                <h1>Lista de Locadoras</h1>
             </div>
         </div>
         <main class="container">

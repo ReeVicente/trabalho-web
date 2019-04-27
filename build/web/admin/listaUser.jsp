@@ -66,7 +66,7 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="/LoginJSP/admin/listaLocadoras.jsp">Locadoras</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="/LoginJSP/admin/listaUser.jsp">Usuários</a>
                     </li>
                 </ul>
@@ -81,7 +81,7 @@
         </nav>
         <div class="jumbotron">
             <div class="container">
-                <h1>Locadoras</h1>
+                <h1>Lista de Usuários</h1>
             </div>
         </div>
         <main class="container">
@@ -106,7 +106,7 @@
                             <td><%= listaUser.get(i).getNome() %></td>
                             <td><%= listaUser.get(i).getCpf()%></td>
                             <td><a href="/LoginJSP/admin/editarUser.jsp?id=<%= listaUser.get(i).getId()%>" class="btn btn-primary">Editar</a></td>
-                            <td><a href="/LoginJSP/user/remocao?id=<%= listaUser.get(i).getId()%>" class="btn btn-danger">Apagar</a></td>
+                            <td><a href="/LoginJSP/cliente/remocao?id=<%= listaUser.get(i).getId()%>" class="btn btn-danger">Apagar</a></td>
                         </tr>
                         <% } %>
                     </c:forEach>

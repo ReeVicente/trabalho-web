@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = "/user/*")
+@WebServlet(urlPatterns = "/cliente/*")
 public class UserController extends HttpServlet {
 
     private UserDAO dao;
@@ -78,11 +78,11 @@ public class UserController extends HttpServlet {
     private void lista(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        List<Usuario> listaUsuarios = dao.getAll();
+        List<Usuario> listaUser = dao.getAll();
         try (PrintWriter out = response.getWriter()) {
-           out.println(listaUsuarios.get(0).getEmail());
+           out.println(listaUser.get(0).getEmail());
         }
-        request.setAttribute("listaUser", listaUsuarios);
+        request.setAttribute("listaUser", listaUser);
         
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/WEB-INF/listaUser.jsp");
         dispatcher.forward(request, response);

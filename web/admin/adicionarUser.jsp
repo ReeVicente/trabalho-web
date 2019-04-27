@@ -62,7 +62,7 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="/LoginJSP/admin/listaLocadoras.jsp">Locadoras</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="/LoginJSP/admin/listaUser.jsp">Usuários</a>
                     </li>
                 </ul>
@@ -82,7 +82,7 @@
         </div>
         <div align="center">
       
-            <form id="form-insert" action="/LoginJSP/user/insercao" method="post">
+            <form id="form-insert" action="/LoginJSP/cliente/insercao" method="post">
                     
                 <input type="hidden"
                 name="${_csrf.parameterName}"
@@ -110,7 +110,7 @@
                     <tr>
                         <th>CPF </th>
                         <td>
-                            <input type="text" class="form-control cnpj" name="cpf"required placeholder="CPF" />
+                            <input type="text" class="form-control cnpj" name="cpf" required placeholder="CPF" />
                         </td>
                     </tr>
                     <tr>
@@ -122,13 +122,13 @@
                     <tr>
                         <th>Sexo</th>
                         <td>
-                            <input type="text" class="form-control" name="telefone" placeholder="Sexo" required />
+                            <input type="text" class="form-control" name="sexo" placeholder="Sexo" required />
                         </td>
                     </tr>
                     <tr>
                         <th>Data de Nascimento</th>
                         <td>
-                            <input type="date" class="form-control" name="Data de Nascimento" placeholder="Datadenascimento" required />
+                            <input type="text" class="form-control" name="datadenascimento" placeholder="Datadenascimento" required />
                         </td>
                     </tr>
                     <tr>

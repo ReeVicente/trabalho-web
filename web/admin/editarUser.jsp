@@ -1,6 +1,6 @@
 <%@page import="java.util.List"%>
-<%@page import="model.Locadora"%>
-<%@page import="dao.LocadoraDAO"%>
+<%@page import="model.Usuario"%>
+<%@page import="dao.UserDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -45,10 +45,10 @@
             userStatement.close();
             conn.close();
             
-            LocadoraDAO dao;
-            dao = new LocadoraDAO();
+            UserDAO dao;
+            dao = new UserDAO();
 
-            Locadora locadora = dao.get(Integer.parseInt(request.getParameter("id")));
+            Usuario user = dao.get(Integer.parseInt(request.getParameter("id")));
             
             %>
               
@@ -64,7 +64,7 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="/LoginJSP/admin/listaLocadoras.jsp">Locadoras</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="/LoginJSP/admin/listaUser.jsp">Usuários</a>
                     </li>
                 </ul>
@@ -79,12 +79,12 @@
         </nav>
         <div class="jumbotron">
             <div class="container">
-                <h1>Editar Locadora</h1>
+                <h1>Editar Usuario</h1>
             </div>
         </div>
         <div align="center">
       
-            <form id="form-insert" action="/LoginJSP/locadora/atualizacao" method="post">
+            <form id="form-insert" action="/LoginJSP/cliente/atualizacao" method="post">
                     
                 <input type="hidden"
                 name="${_csrf.parameterName}"
@@ -94,14 +94,14 @@
                     <tr>
                         <th>Nome: </th>
                         <td>
-                            <input type="text" name="nome" required class="form-control" value="<%= locadora.getNome() %>" placeholder="Nome"/>
+                            <input type="text" name="nome" required class="form-control" value="<%= user.getNome() %>" placeholder="Nome"/>
                         </td>
                     </tr>
-                    <input type="hidden" name="id" value="<%= locadora.getId()%>">
+                    <input type="hidden" name="id" value="<%= user.getId()%>">
                     <tr>
                         <th>E-mail</th>
                         <td>
-                            <input type="email" name="email" class="form-control" value="<%= locadora.getEmail()%>" required placeholder="E-mail">
+                            <input type="email" name="email" class="form-control" value="<%= user.getEmail()%>" required placeholder="E-mail">
                         </td>
                     </tr>
                     <tr>
@@ -111,15 +111,27 @@
                         </td>
                     </tr>
                     <tr>
-                        <th>CNPJ </th>
+                        <th>CPF </th>
                         <td>
-                            <input type="text" class="form-control cnpj" name="cnpj" value="<%= locadora.getCnpj()%>" required placeholder="CNPJ" />
+                            <input type="text" class="form-control cnpj" name="cpf" value="<%= user.getCpf()%>" required placeholder="CPF" />
                         </td>
                     </tr>
                     <tr>
-                        <th>Cidade</th>
+                        <th>Telefone</th>
                         <td>
-                            <input type="text" class="form-control" name="cidade" value="<%= locadora.getCidade()%>" placeholder="Cidade" required />
+                            <input type="text" class="form-control" name="telefone" value="<%= user.getTelefone()%>" placeholder="Telefone" required />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Sexo</th>
+                        <td>
+                            <input type="text" class="form-control" name="sexo" value="<%= user.getSexo()%>" placeholder="Sexo" required />
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>Data de Nascimento</th>
+                        <td>
+                            <input type="text" class="form-control" name="datadenascimento" value="<%= user.getDatadenascimento()%>" placeholder="Datadenascimento" required />
                         </td>
                     </tr>
                     <tr>
