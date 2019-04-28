@@ -1,6 +1,6 @@
 <%@page import="java.util.List"%>
-<%@page import="model.Usuario"%>
-<%@page import="dao.UserDAO"%>
+<%@page import="model.Locadora"%>
+<%@page import="dao.LocadoraDAO"%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
@@ -39,17 +39,16 @@
             userStatement.setString(1, request.getUserPrincipal().getName().toString());
             resultSet = userStatement.executeQuery();
             resultSet.next();
-            int id= resultSet.getInt("id");
+            
             String nome = resultSet.getString("nome");
-            String email = resultSet.getString("email");
             resultSet.close();
             userStatement.close();
             conn.close();
             
-            UserDAO dao;
-            dao = new UserDAO();
+            LocadoraDAO dao;
+            dao = new LocadoraDAO();
 
-            List<Usuario> listaUser = dao.getAll();
+            List<Locadora> listaLocadoras = dao.getAll();
             
             %>
             
@@ -82,7 +81,7 @@
         </nav>
         <div class="jumbotron">
             <div class="container">
-                <h1>Minha conta</h1>
+                <h1>Lista de Locadoras Disponíveis</h1>
             </div>
         </div>
         <main class="container">
@@ -90,20 +89,25 @@
                 <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th scope="col">Usuário</th>
-                        <th scope="col">E-mail</th>
+                        <th scope="col">Locadora</th>
+                        <th scope="col">CNPJ</th>
+                        <th scope="col">Cidade</th>
                         <th scope="col">Editar</th>
-                        <th scope="col">Apagar</th>
                     </tr>
                 </thead>
                 <tbody>
-                    
+                       <% 
+                        for(int i = 0; i < listaLocadoras.size(); i++) {
+                       %>
                         <tr>
-                            <td><%= nome %></td>
-                            <td><%= email %></td>
-                            <td><a href="/LoginJSP/user/editarUserbyUser.jsp?id=<%=id%>" class="btn btn-primary">Editar</a></td>
-                            <td><a href="/LoginJSP/cliente/remocao?id=<%=id%>" class="btn btn-danger">Apagar</a></td>
+                            <td><%= listaLocadoras.get(i).getNome() %></td>
+                            <td><%= listaLocadoras.get(i).getCnpj()%></td>
+                            <td><%= listaLocadoras.get(i).getCidade()%></td>
+                            <td><a href="/LoginJSP/locadora/rent?id=<%= listaLocadoras.get(i).getId()%>" class="btn btn-primary">Alugar</a></td>
                         </tr>
+                        <% } %>
+                    </c:forEach>
+
                 </tbody>
             </table>
             </div>
