@@ -67,6 +67,37 @@ public class LocadoraDAO {
         }
       
     }
+    public List<Locadora> searchByCity(String name) {
+
+        List<Locadora> listaLocadoras = new ArrayList<>();
+
+        String sql = "SELECT Locadora.*, Usuario.* FROM Locadora JOIN Usuario on Usuario.email = Locadora.email where Locadora.cidade LIKE ?";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            
+            statement.setString(1, "%" + name + "%");
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String nome = resultSet.getString("nome");
+                String email = resultSet.getString("email");
+                String cnpj = resultSet.getString("cnpj");
+                String cidade = resultSet.getString("cidade");
+                Locadora locadora = new Locadora(id, nome, email, cnpj, cidade);
+                listaLocadoras.add(locadora);
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return listaLocadoras;
+    }
 
     public List<Locadora> getAll() {
 

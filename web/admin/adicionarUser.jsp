@@ -122,13 +122,16 @@
                     <tr>
                         <th>Sexo</th>
                         <td>
-                            <input type="text" class="form-control" name="sexo" placeholder="Sexo" required />
+                            <select name="sexo" required class="form-control">
+                                <option value="M">Masculino</option>
+                                <option value="F">Feminino</option>
+                            </select>
                         </td>
                     </tr>
                     <tr>
                         <th>Data de Nascimento</th>
                         <td>
-                            <input type="text" class="form-control" name="datadenascimento" placeholder="Datadenascimento" required />
+                            <input type="text" class="form-control" name="datadenascimento" placeholder="Data de nascimento" required />
                         </td>
                     </tr>
                     <tr>
@@ -147,7 +150,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
        
         <script> 
-            $('.cnpj').mask('00.000.000/0000-00', {reverse: true});
+            $('.cnpj').mask('000.000.000-00', {reverse: true});
         </script>
     </body>
 </html>
