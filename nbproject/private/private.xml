@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/renan/Documentos/Desenvolvimento%20Web/trabalho-web/src/java/br/ufscar/dc/dsw/AppConfig.java</file>
-            <file>file:/home/renan/Documentos/Desenvolvimento%20Web/trabalho-web/src/java/dao/LocadoraDAO.java</file>
             <file>file:/home/renan/Documentos/Desenvolvimento%20Web/trabalho-web/web/index.jsp</file>
+            <file>file:/home/renan/Documentos/Desenvolvimento%20Web/trabalho-web/sql/db.sql</file>
+            <file>file:/home/renan/Documentos/Desenvolvimento%20Web/trabalho-web/src/java/br/ufscar/dc/dsw/AppConfig.java</file>
+            <file>file:/home/renan/Documentos/Desenvolvimento%20Web/trabalho-web/web/admin/adicionarUser.jsp</file>
+            <file>file:/home/renan/Documentos/Desenvolvimento%20Web/trabalho-web/src/java/dao/LocadoraDAO.java</file>
         </group>
     </open-files>
 </project-private>

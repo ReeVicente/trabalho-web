@@ -17,7 +17,7 @@ nome varchar(50) not null
 
 create table Cliente (
     id integer not null generated always as identity (start with 1, increment by 1),
-    cpf varchar(11) not null unique,
+    cpf varchar(14) not null unique,
     telefone varchar(11),
     sexo varchar(1),
     datadenascimento varchar(10) not null,
@@ -36,7 +36,7 @@ create table Locadora (
 
 create table Locacao (
     id integer not null generated always as identity (start with 1, increment by 1),
-    cpf varchar(11) not null unique,
+    cpf varchar(14) not null unique,
     cnpj varchar(18) not null unique,
     data_locacao date not null,
     FOREIGN KEY (cpf) REFERENCES Cliente(cpf),
