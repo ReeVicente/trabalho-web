@@ -39,7 +39,7 @@
             userStatement.setString(1, request.getUserPrincipal().getName().toString());
             resultSet = userStatement.executeQuery();
             resultSet.next();
-            int id = resultSet.getInt("id");
+            int id= resultSet.getInt("id");
             String nome = resultSet.getString("nome");
             String email = resultSet.getString("email");
             resultSet.close();
@@ -65,10 +65,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="/LoginJSP/user/editarUserbyUser.jsp?id=<%= id%>">Editar</a>
+                        <a class="nav-link" href="/LoginJSP/user/alugar.jsp">Alugar Bicicleta</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="#">Alugar</a>
+                        <a class="nav-link" href="/LoginJSP/user/listaLocacoes.jsp">Minhas Locações</a>
                     </li>
                 </ul>
                 <span>Olá <%= nome %></span>
@@ -101,8 +101,8 @@
                         <tr>
                             <td><%= nome %></td>
                             <td><%= email %></td>
-                            <td><a href="/LoginJSP/user/editarUserbyUser.jsp?id=<%= id%>" class="btn btn-primary">Editar</a></td>
-                            <td><a href="#" class="btn btn-danger">Apagar</a></td>
+                            <td><a href="/LoginJSP/user/editarUserbyUser.jsp?id=<%=id%>" class="btn btn-primary">Editar</a></td>
+                            <td><a href="/LoginJSP/cliente/remocao?id=<%=id%>" class="btn btn-danger">Apagar</a></td>
                         </tr>
                 </tbody>
             </table>
