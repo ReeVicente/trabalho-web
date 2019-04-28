@@ -1,7 +1,4 @@
-
-//Roteiro
-
-Gustavo Henrique Carvalho Nakagawa  -  726534  
+Gustavo Henrique Carvalho Nakagawa  -  726534
 Renan Vicente da Costa              -  743593 
 
 * SGBD utilizado (JavaDB?), nome do banco, usuário e senha de acesso
@@ -24,4 +21,3 @@ usuário admin padrão (admin@admin senha admin) e usuário padrão (user@user s
 * Alguma informação adicional?
 
 	CRUD de locadoras e clientes completos, porém nã
->>>>>>> 216bb783700b2b745ec72d4dd28b63a9041998e5
