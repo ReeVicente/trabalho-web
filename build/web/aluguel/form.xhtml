@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://xmlns.jcp.org/jsf/html"  
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:p="http://primefaces.org/ui">  
+    <h:head>  
+        <title>#{msg['book.form.page.title']}</title>
+        <link rel="stylesheet" 
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
+              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" 
+              crossorigin="anonymous"/>
+        <h:outputStylesheet name="/css/estilo.css"/>
+    </h:head>  
+    <h:body>  
+        <h:form id="form" class="form-horizontal">
+
+            <div class="form-group">  
+                <div class="col-sm-4"></div>  
+                <div  class="col-sm-4">  
+                    <h2 style="text-align: center">#{msg['book.form.label']}</h2>  
+                </div>  
+            </div>  
+            <hr/>  
+            <div class="form-group">  
+                <h:outputLabel for="title" class="control-label col-sm-4">#{msg['book.title.label']}</h:outputLabel>  
+                <div class="col-sm-4">  
+                    <h:inputText id="title" value="#{aluguelBean.aluguel.titulo}" class="form-control"   
+                                 validatorMessage="#{msg['book.title.required.message']}">
+                        <f:validateRequired/>
+                    </h:inputText>
+                    <h:message for="title"/>
+                </div>  
+            </div>  
+
+            <div class="form-group">  
+                <h:outputLabel for="author" class="control-label col-sm-4">#{msg['book.author.label']}</h:outputLabel>  
+                <div class="col-sm-4">  
+                    <h:inputText id="author" value="#{aluguelBean.aluguel.autor}" class="form-control"   
+                                 validatorMessage="#{msg['book.author.required.message']}">
+                        <f:validateRequired/>
+                    </h:inputText>
+                    <h:message for="author"/>
+                </div>  
+            </div>
+
+            <div class="form-group">  
+                <h:outputLabel for="year" class="control-label col-sm-4">#{msg['book.year.label']}</h:outputLabel>  
+                <div class="col-sm-4">  
+                    <h:inputText id="year" value="#{aluguelBean.aluguel.ano}" class="form-control"   
+                                 validatorMessage="#{msg['book.year.required.message']}"
+                                 a:type="Number" a:min="1500">
+                        <f:validateRequired/>
+
+                    </h:inputText>
+                    <h:message for="year"/>
+                </div>  
+            </div>
+            <div class="form-group">  
+                <h:outputLabel for="price" class="control-label col-sm-4">#{msg['book.price.label']}</h:outputLabel>  
+                <div class="col-sm-4">  
+                    <h:inputText id="price" value="#{aluguelBean.aluguel.preco}" class="form-control"   
+                                 validatorMessage="#{msg['book.price.required.message']}"
+                                 a:type="Number" a:step="any" a:min="0.01">
+                        <f:validateRequired/>
+                    </h:inputText>
+                    <h:message for="price"/>
+                </div>  
+            </div>
+
+            <div class="form-group">  
+                <h:outputLabel for="publisher" class="control-label col-sm-4">#{msg['book.publisher.label']}</h:outputLabel>  
+                <div class="col-sm-4">
+                    <h:selectOneMenu id="publisher" value="#{aluguelBean.aluguel.loja}">
+                        <f:selectItems value="#{aluguelBean.lojas}"/>
+                        <f:converter converterId="LojaConverter" />
+                    </h:selectOneMenu>
+                    <h:message for="publisher"/>
+                </div>  
+            </div>
+
+            <div class="form-group">  
+                <div class="col-sm-4"></div>  
+                <div class="col-sm-4">  
+                    <div class="col-sm-2">
+
+                        <h:commandButton value="#{msg['book.save.command.label']}" action="#{aluguelBean.salva()}" class="btn btn-primary"   
+                                         style="width: 80px;"></h:commandButton>  
+                    </div>  
+                    <br/>  
+                    <div class="col-sm-2">  
+                        <h:link outcome="index" value="#{msg['book.list.command.label']}" class="btn btn-success" />  
+                    </div>  
+                </div>  
+            </div>  
+        </h:form>  
+    </h:body>  
+</html>
