@@ -46,6 +46,10 @@
                     <h:outputText value="#{aluguel.loja}"/>  
                 </h:column>
                 <h:column>  
+                    <f:facet name="header">#{msg['rent.client.label']}</f:facet>  
+                    <h:outputText value="#{aluguel.cliente}"/>  
+                </h:column>
+                <h:column>  
                     <f:facet name="header"></f:facet>  
                     <h:commandButton action = "#{aluguelBean.edita(aluguel.id)}" value="#{msg['rent.edit.command.label']}" class="btn btn-primary">  
                     </h:commandButton>  

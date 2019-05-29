@@ -79,6 +79,17 @@
                     <h:message for="store"/>
                 </div>  
             </div>
+            
+            <div class="form-group">  
+                <h:outputLabel for="client" class="control-label col-sm-4">#{msg['rent.client.label']}</h:outputLabel>  
+                <div class="col-sm-4">
+                    <h:selectOneMenu id="client" value="#{aluguelBean.aluguel.cliente}">
+                        <f:selectItems value="#{aluguelBean.clientes}"/>
+                        <f:converter converterId="ClienteConverter" />
+                    </h:selectOneMenu>
+                    <h:message for="client"/>
+                </div>  
+            </div>
 
             <div class="form-group">  
                 <div class="col-sm-4"></div>  
