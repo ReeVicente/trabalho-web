@@ -22,9 +22,9 @@ public class AluguelDAO extends GenericDAO<Aluguel>{
     public List<Aluguel> getAll() {
         EntityManager em = this.getEntityManager();
         Query q = em.createQuery("select l from Aluguel l", Aluguel.class);
-        List<Aluguel> aluguels = q.getResultList();
+        List<Aluguel> alugueis = q.getResultList();
         em.close();
-        return aluguels;
+        return alugueis;
     }
 
     @Override

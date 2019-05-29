@@ -1,8 +1,10 @@
 package br.ufscar.dc.dsw.bean;
 
 import br.ufscar.dc.dsw.dao.LojaDAO;
+import br.ufscar.dc.dsw.dao.ClienteDAO;
 import br.ufscar.dc.dsw.dao.AluguelDAO;
 import br.ufscar.dc.dsw.pojo.Loja;
+import br.ufscar.dc.dsw.pojo.Cliente;
 import br.ufscar.dc.dsw.pojo.Aluguel;
 import java.io.Serializable;
 import java.sql.SQLException;
@@ -52,7 +54,7 @@ public class AluguelBean implements Serializable {
         return "/index.xhtml?faces-redirect=true";
     }
     
-    public List<Aluguel> getAluguels() throws SQLException {
+    public List<Aluguel> getAlugueis() throws SQLException {
         AluguelDAO dao = new AluguelDAO();
         return dao.getAll();
     }
@@ -65,4 +67,10 @@ public class AluguelBean implements Serializable {
         LojaDAO dao = new LojaDAO();
         return dao.getAll();
     }
+    
+    public List<Cliente> getClientes() throws SQLException {
+        ClienteDAO dao = new ClienteDAO();
+        return dao.getAll();
+    }
+
 }

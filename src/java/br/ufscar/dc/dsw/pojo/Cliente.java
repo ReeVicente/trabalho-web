@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 
 @Entity
 @Cacheable(value = false)
-public class Loja implements Serializable {
+public class Cliente implements Serializable {
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -22,7 +22,7 @@ public class Loja implements Serializable {
     
     private String pais;
     
-    @OneToMany(mappedBy = "loja", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
     private List<Aluguel> alugueis;
 
     public Long getId() {
@@ -63,9 +63,9 @@ public class Loja implements Serializable {
 		return true;
 	if (obj == null)
 		return false;
-	if (!(obj instanceof Loja))
+	if (!(obj instanceof Cliente))
 		return false;
-	Loja other = (Loja) obj;
+	Cliente other = (Cliente) obj;
 	return other.nome.equals(this.nome);
     }
     

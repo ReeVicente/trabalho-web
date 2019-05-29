@@ -21,6 +21,7 @@ public class Aluguel implements Serializable {
     
     @ManyToOne
     private Loja loja;
+    private Cliente cliente;
 
     public Long getId() {
         return id;
@@ -65,8 +66,16 @@ public class Aluguel implements Serializable {
     public Loja getLoja() {
         return loja;
     }
+    
+    public Cliente getCliente() {
+        return cliente;
+    }
 
     public void setLoja(Loja loja) {
         this.loja = loja;
+    }
+    
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }
