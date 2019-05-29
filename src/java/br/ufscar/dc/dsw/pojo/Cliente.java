@@ -17,10 +17,14 @@ public class Cliente implements Serializable {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-    
     private String nome;
-    
-    private String pais;
+    private String email;
+    private String senha;
+    private String cpf;
+    private String telefone;
+    private String sexo;
+    private String datadenascimento;
+
     
     @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
     private List<Aluguel> alugueis;
@@ -40,14 +44,58 @@ public class Cliente implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    public String getPais() {
-        return pais;
+    
+     public String getEmail() {
+        return email;
     }
 
-    public void setPais(String pais) {
-        this.pais = pais;
+    public void setEmail(String email) {
+        this.email = email;
     }
+
+    
+     public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+        
+     public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+        
+     public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+    
+     public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
+    
+     public String getDatadenascimento() {
+        return datadenascimento;
+    }
+
+    public void setDatadenascimento(String datadenascimento) {
+        this.datadenascimento = datadenascimento;
+    }
+    
+
+
 
     public List<Aluguel> getAlugueis() {
         return alugueis;

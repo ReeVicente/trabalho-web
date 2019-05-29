@@ -20,7 +20,13 @@ public class Loja implements Serializable {
     
     private String nome;
     
-    private String pais;
+    private String email;
+    
+    private String senha;
+    
+    private String cnpj;
+    
+    private String cidade;
     
     @OneToMany(mappedBy = "loja", fetch = FetchType.LAZY)
     private List<Aluguel> alugueis;
@@ -40,13 +46,37 @@ public class Loja implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    public String getPais() {
-        return pais;
+    
+    public String getEmail() {
+        return email;
     }
 
-    public void setPais(String pais) {
-        this.pais = pais;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+    
+    public String getCnpj() {
+        return cnpj;
+    }
+
+    public void setCnpj(String cnpj) {
+        this.cnpj = cnpj;
+    }
+    
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
     }
 
     public List<Aluguel> getAlugueis() {

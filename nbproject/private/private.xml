@@ -2,31 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/D:/New%20folder/5/Locadora/build/web/WEB-INF/classes/resouces.res</file>
-            <file>file:/D:/New%20folder/5/Locadora/src/java/i18n/mensagens_pt.properties</file>
-            <file>file:/D:/New%20folder/5/Locadora/build/web/WEB-INF/classes/.netbeans_update_resources</file>
-            <file>file:/D:/New%20folder/5/Locadora/web/aluguel/form.xhtml</file>
-            <file>file:/D:/New%20folder/5/Locadora/build/web/aluguel/form.xhtml</file>
-            <file>file:/D:/New%20folder/5/Locadora/src/java/br/ufscar/dc/dsw/dao/LojaDAO.java</file>
-            <file>file:/D:/New%20folder/5/Locadora/src/java/br/ufscar/dc/dsw/dao/AluguelDAO.java</file>
-            <file>file:/D:/New%20folder/5/Locadora/src/java/i18n/mensagens_en.properties</file>
-            <file>file:/D:/New%20folder/5/Locadora/src/java/br/ufscar/dc/dsw/converter/ClienteConverter.java</file>
-            <file>file:/D:/New%20folder/5/Locadora/build/web/WEB-INF/classes/META-INF/persistence.xml</file>
-            <file>file:/D:/New%20folder/5/Locadora/src/java/br/ufscar/dc/dsw/converter/LojaConverter.java</file>
-            <file>file:/D:/New%20folder/5/Locadora/web/index.xhtml</file>
-            <file>file:/D:/New%20folder/5/Locadora/src/java/br/ufscar/dc/dsw/pojo/Aluguel.java</file>
-            <file>file:/D:/New%20folder/5/Locadora/build/web/WEB-INF/classes/.netbeans_automatic_build</file>
-            <file>file:/D:/New%20folder/5/Locadora/src/java/br/ufscar/dc/dsw/dao/GenericDAO.java</file>
-            <file>file:/D:/New%20folder/5/Locadora/build/web/WEB-INF/web.xml</file>
-            <file>file:/D:/New%20folder/5/Locadora/src/java/br/ufscar/dc/dsw/bean/LojaBean.java</file>
-            <file>file:/D:/New%20folder/5/Locadora/build/web/META-INF/MANIFEST.MF</file>
-            <file>file:/D:/New%20folder/5/Locadora/src/java/br/ufscar/dc/dsw/bean/AluguelBean.java</file>
-            <file>file:/D:/New%20folder/5/Locadora/build/web/META-INF/context.xml</file>
-            <file>file:/D:/New%20folder/5/Locadora/src/java/br/ufscar/dc/dsw/bean/ClienteBean.java</file>
-            <file>file:/D:/New%20folder/5/Locadora/build/web/WEB-INF/faces-config.xml</file>
-            <file>file:/D:/New%20folder/5/Locadora/src/java/br/ufscar/dc/dsw/pojo/Cliente.java</file>
-            <file>file:/D:/New%20folder/5/Locadora/src/java/br/ufscar/dc/dsw/dao/ClienteDAO.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
