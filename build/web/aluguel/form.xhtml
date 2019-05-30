@@ -26,7 +26,7 @@
             <div class="form-group">  
                 <h:outputLabel for="title" class="control-label col-sm-4">#{msg['rent.title.label']}</h:outputLabel>  
                 <div class="col-sm-4">  
-                    <h:inputText id="title" value="#{aluguelBean.aluguel.titulo}" class="form-control"   
+                    <h:inputText id="title" value="#{aluguelBean.aluguel.data}" class="form-control"   
                                  validatorMessage="#{msg['rent.title.required.message']}">
                         <f:validateRequired/>
                     </h:inputText>
@@ -37,7 +37,7 @@
             <div class="form-group">  
                 <h:outputLabel for="author" class="control-label col-sm-4">#{msg['rent.author.label']}</h:outputLabel>  
                 <div class="col-sm-4">  
-                    <h:inputText id="author" value="#{aluguelBean.aluguel.autor}" class="form-control"   
+                    <h:inputText id="author" value="#{aluguelBean.aluguel.hora}" class="form-control"   
                                  validatorMessage="#{msg['rent.author.required.message']}">
                         <f:validateRequired/>
                     </h:inputText>
@@ -45,30 +45,8 @@
                 </div>  
             </div>
 
-            <div class="form-group">  
-                <h:outputLabel for="year" class="control-label col-sm-4">#{msg['rent.year.label']}</h:outputLabel>  
-                <div class="col-sm-4">  
-                    <h:inputText id="year" value="#{aluguelBean.aluguel.ano}" class="form-control"   
-                                 validatorMessage="#{msg['rent.year.required.message']}"
-                                 a:type="Number" a:min="1500">
-                        <f:validateRequired/>
-
-                    </h:inputText>
-                    <h:message for="year"/>
-                </div>  
-            </div>
-            <div class="form-group">  
-                <h:outputLabel for="price" class="control-label col-sm-4">#{msg['rent.price.label']}</h:outputLabel>  
-                <div class="col-sm-4">  
-                    <h:inputText id="price" value="#{aluguelBean.aluguel.preco}" class="form-control"   
-                                 validatorMessage="#{msg['rent.price.required.message']}"
-                                 a:type="Number" a:step="any" a:min="0.01">
-                        <f:validateRequired/>
-                    </h:inputText>
-                    <h:message for="price"/>
-                </div>  
-            </div>
-
+      
+           
             <div class="form-group">  
                 <h:outputLabel for="store" class="control-label col-sm-4">#{msg['rent.store.label']}</h:outputLabel>  
                 <div class="col-sm-4">

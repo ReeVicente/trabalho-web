@@ -14,13 +14,25 @@
         <h:form> 
             <ul>
                 <li>
-                    <h:commandLink action="#{aluguelBean.lista()}">#{msg['rent.label']}: CRUD</h:commandLink>
+                    <h:commandLink action="#{aluguelBean.lista()}">#{msg['rent.label']}: ADMONLY</h:commandLink>
                 </li>
                 <li>
-                    <h:commandLink action="#{lojaBean.lista()}">#{msg['store.label']}: CRUD</h:commandLink>
+                    <h:commandLink action="#{aluguelUBean.lista()}">#{msg['rent.label']}: CLIENTEONLY</h:commandLink>
                 </li>
                 <li>
-                    <h:commandLink action="#{clienteBean.lista()}">#{msg['client.label']}: CRUD</h:commandLink>
+                    <h:commandLink action="#{aluguelLBean.lista()}">#{msg['rent.label']}: LOJAONLY</h:commandLink>
+                </li>
+                <li>
+                    <h:commandLink action="#{lojaBean.lista()}">#{msg['store.label']}: ADMONLY</h:commandLink>
+                </li>
+                <li>
+                    <h:commandLink action="#{lojaUBean.lista()}">#{msg['store.label']}: LOJAONLY</h:commandLink>
+                </li>
+                <li>
+                    <h:commandLink action="#{clienteBean.lista()}">#{msg['client.label']}: ADMONLY</h:commandLink>
+                </li>
+                <li>
+                    <h:commandLink action="#{clienteUBean.lista()}">#{msg['client.label']}: CLIENTEONLY</h:commandLink>
                 </li>
             </ul>
         </h:form>

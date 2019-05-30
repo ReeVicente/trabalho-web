@@ -27,20 +27,12 @@
                 </h:column>  
                 <h:column>  
                     <f:facet name="header">#{msg['rent.title.label']}</f:facet>  
-                    <h:outputText value="#{aluguel.titulo}"/>  
+                    <h:outputText value="#{aluguel.data}"/>  
                 </h:column>  
                 <h:column>  
                     <f:facet name="header">#{msg['rent.author.label']}</f:facet>  
-                    <h:outputText value="#{aluguel.autor}"/>  
+                    <h:outputText value="#{aluguel.hora}"/>  
                 </h:column>  
-                <h:column>  
-                    <f:facet name="header">#{msg['rent.year.label']}</f:facet>  
-                    <h:outputText value="#{aluguel.ano}"/>  
-                </h:column>  
-                <h:column>  
-                    <f:facet name="header">#{msg['rent.price.label']}</f:facet>  
-                    <h:outputText value="#{aluguel.preco}"/>  
-                </h:column>
                 <h:column>  
                     <f:facet name="header">#{msg['rent.store.label']}</f:facet>  
                     <h:outputText value="#{aluguel.loja}"/>  

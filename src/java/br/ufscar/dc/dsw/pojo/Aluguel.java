@@ -14,10 +14,8 @@ public class Aluguel implements Serializable {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     
-    private String titulo;
-    private String autor;
-    private Integer ano;
-    private Float preco;
+    private String data;
+    private String hora;
     
     @ManyToOne
     private Loja loja;
@@ -31,36 +29,20 @@ public class Aluguel implements Serializable {
         this.id = id;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public String getData() {
+        return data;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setData(String data) {
+        this.data = data;
     }
 
-    public String getAutor() {
-        return autor;
+    public String getHora() {
+        return hora;
     }
 
-    public void setAutor(String autor) {
-        this.autor = autor;
-    }
-
-    public Integer getAno() {
-        return ano;
-    }
-
-    public void setAno(Integer ano) {
-        this.ano = ano;
-    }
-
-    public Float getPreco() {
-        return preco;
-    }
-
-    public void setPreco(Float preco) {
-        this.preco = preco;
+    public void setHora(String hora) {
+        this.hora = hora;
     }
 
     public Loja getLoja() {

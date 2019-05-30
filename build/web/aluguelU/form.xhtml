@@ -26,7 +26,7 @@
             <div class="form-group">  
                 <h:outputLabel for="title" class="control-label col-sm-4">#{msg['rent.title.label']}</h:outputLabel>  
                 <div class="col-sm-4">  
-                    <h:inputText id="title" value="#{aluguelBean.aluguel.data}" class="form-control"   
+                    <h:inputText id="title" value="#{aluguelUBean.aluguel.data}" class="form-control"   
                                  validatorMessage="#{msg['rent.title.required.message']}">
                         <f:validateRequired/>
                     </h:inputText>
@@ -37,7 +37,7 @@
             <div class="form-group">  
                 <h:outputLabel for="author" class="control-label col-sm-4">#{msg['rent.author.label']}</h:outputLabel>  
                 <div class="col-sm-4">  
-                    <h:inputText id="author" value="#{aluguelBean.aluguel.hora}" class="form-control"   
+                    <h:inputText id="author" value="#{aluguelUBean.aluguel.hora}" class="form-control"   
                                  validatorMessage="#{msg['rent.author.required.message']}">
                         <f:validateRequired/>
                     </h:inputText>
@@ -50,22 +50,11 @@
             <div class="form-group">  
                 <h:outputLabel for="store" class="control-label col-sm-4">#{msg['rent.store.label']}</h:outputLabel>  
                 <div class="col-sm-4">
-                    <h:selectOneMenu id="store" value="#{aluguelBean.aluguel.loja}">
-                        <f:selectItems value="#{aluguelBean.lojas}"/>
+                    <h:selectOneMenu id="store" value="#{aluguelUBean.aluguel.loja}">
+                        <f:selectItems value="#{aluguelUBean.lojas}"/>
                         <f:converter converterId="LojaConverter" />
                     </h:selectOneMenu>
                     <h:message for="store"/>
-                </div>  
-            </div>
-            
-            <div class="form-group">  
-                <h:outputLabel for="client" class="control-label col-sm-4">#{msg['rent.client.label']}</h:outputLabel>  
-                <div class="col-sm-4">
-                    <h:selectOneMenu id="client" value="#{aluguelBean.aluguel.cliente}">
-                        <f:selectItems value="#{aluguelBean.clientes}"/>
-                        <f:converter converterId="ClienteConverter" />
-                    </h:selectOneMenu>
-                    <h:message for="client"/>
                 </div>  
             </div>
 
@@ -74,7 +63,7 @@
                 <div class="col-sm-4">  
                     <div class="col-sm-2">
 
-                        <h:commandButton value="#{msg['rent.save.command.label']}" action="#{aluguelBean.salva()}" class="btn btn-primary"   
+                        <h:commandButton value="#{msg['rent.save.command.label']}" action="#{aluguelUBean.salva()}" class="btn btn-primary"   
                                          style="width: 80px;"></h:commandButton>  
                     </div>  
                     <br/>  

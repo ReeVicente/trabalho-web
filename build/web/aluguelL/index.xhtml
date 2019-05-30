@@ -19,7 +19,7 @@
                 <h2><h:outputText value="#{msg['rent.list.page.title']}"/></h2>  
             </center>
             <br/>
-            <h:dataTable value="#{aluguelBean.alugueis}" var="aluguel"   
+            <h:dataTable value="#{aluguelLBean.alugueis}" var="aluguel"   
                          class="table table-striped table-hover table-bordered">  
                 <h:column>  
                     <f:facet name="header">#{msg['rent.id.label']}</f:facet>  
@@ -34,21 +34,12 @@
                     <h:outputText value="#{aluguel.hora}"/>  
                 </h:column>  
                 <h:column>  
-                    <f:facet name="header">#{msg['rent.store.label']}</f:facet>  
-                    <h:outputText value="#{aluguel.loja}"/>  
-                </h:column>
-                <h:column>  
                     <f:facet name="header">#{msg['rent.client.label']}</f:facet>  
                     <h:outputText value="#{aluguel.cliente}"/>  
                 </h:column>
                 <h:column>  
                     <f:facet name="header"></f:facet>  
-                    <h:commandButton action = "#{aluguelBean.edita(aluguel.id)}" value="#{msg['rent.edit.command.label']}" class="btn btn-primary">  
-                    </h:commandButton>  
-                </h:column>  
-                <h:column>  
-                    <f:facet name="header"></f:facet>  
-                    <h:commandButton action = "#{aluguelBean.delete(aluguel)}" value="#{msg['rent.delete.command.label']}" 
+                    <h:commandButton action = "#{aluguelLBean.delete(aluguel)}" value="#{msg['rent.delete.command.label']}" 
                                      onclick="return confirm('#{msg['confirm.delete']}');"
                                      class="btn btn-danger">  
                     </h:commandButton>  
@@ -56,12 +47,7 @@
             </h:dataTable>
             <br/>
             <center>
-                <h:commandButton action = "#{aluguelBean.cadastra()}"   
-                                 value="#{msg['rent.create.command.label']}" class="btn btn-primary"></h:commandButton>
-            </center>
-            <br/>
-            <center>
-                <h:commandButton action = "#{aluguelBean.volta()}"   
+                <h:commandButton action = "#{aluguelLBean.volta()}"   
                                  value="#{msg['root.back.label']}" class="btn btn-success"></h:commandButton>
             </center>  
         </h:form>  
