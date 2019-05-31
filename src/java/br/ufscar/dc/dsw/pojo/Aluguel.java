@@ -19,6 +19,7 @@ public class Aluguel implements Serializable {
     
     @ManyToOne
     private Loja loja;
+    @ManyToOne
     private Cliente cliente;
 
     public Long getId() {

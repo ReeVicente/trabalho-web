@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 public class AluguelDAO extends GenericDAO<Aluguel>{
     
@@ -27,6 +28,23 @@ public class AluguelDAO extends GenericDAO<Aluguel>{
         return alugueis;
     }
 
+    
+    public List<Aluguel> getNomeCliente(String email) {
+        EntityManager em = this.getEntityManager();
+        String s = "select p from Aluguel p where p.cliente.email = :mail";
+        TypedQuery<Aluguel> q = em.createQuery(s, Aluguel.class);
+        q.setParameter("mail", email);
+        return q.getResultList();
+    }
+    
+    public List<Aluguel> getNomeLoja(String email) {
+        EntityManager em = this.getEntityManager();
+        String s = "select l from Aluguel l where l.loja.email = :mail";
+        TypedQuery<Aluguel> q = em.createQuery(s, Aluguel.class);
+        q.setParameter("mail", email);
+        return q.getResultList();
+    }
+    
     @Override
     public void delete(Aluguel aluguel) {
         EntityManager em = this.getEntityManager();

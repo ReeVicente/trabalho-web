@@ -27,6 +27,8 @@ public class ClienteDAO extends GenericDAO<Cliente>{
         em.close();
         return clientes;
     }
+    
+    
 
     @Override
     public void delete(Cliente cliente) {
@@ -61,6 +63,14 @@ public class ClienteDAO extends GenericDAO<Cliente>{
         String sql = "SELECT e FROM Cliente e WHERE e.nome = :nome";
         TypedQuery<Cliente> q = em.createQuery(sql, Cliente.class);
         q.setParameter("nome", nome);
+        return q.getSingleResult();
+    }
+    
+    public Cliente getByEmail(String email) {
+        EntityManager em = this.getEntityManager();
+        String sql = "SELECT e FROM Cliente e WHERE e.email = :email";
+        TypedQuery<Cliente> q = em.createQuery(sql, Cliente.class);
+        q.setParameter("email", email);
         return q.getSingleResult();
     }
 }

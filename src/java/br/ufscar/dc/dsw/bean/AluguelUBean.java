@@ -18,8 +18,13 @@ public class AluguelUBean implements Serializable {
 
     
     private Aluguel aluguel;
+    private String mail;
+    private Cliente cliente;
     
-    public String lista() {
+    public String lista(String mail) {
+        this.mail=mail;
+        ClienteDAO dao = new ClienteDAO();
+        cliente = dao.getByEmail(mail);
         return "aluguelU/index.xhtml";
     }
 
@@ -36,6 +41,7 @@ public class AluguelUBean implements Serializable {
 
     public String salva() {
         AluguelDAO dao = new AluguelDAO();
+        aluguel.setCliente(cliente);
         if (aluguel.getId() == null) {
             dao.save(aluguel);
         } else {
@@ -56,7 +62,7 @@ public class AluguelUBean implements Serializable {
     
     public List<Aluguel> getAlugueis() throws SQLException {
         AluguelDAO dao = new AluguelDAO();
-        return dao.getAll();
+        return dao.getNomeCliente(mail);
     }
 
     public Aluguel getAluguel() {

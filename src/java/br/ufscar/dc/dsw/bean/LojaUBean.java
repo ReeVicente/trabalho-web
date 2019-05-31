@@ -19,8 +19,10 @@ public class LojaUBean implements Serializable {
 
     private Loja loja;
     private Usuario usuario;
+    private String mail;
 
-    public String lista() {
+    public String lista(String mail) {
+        this.mail=mail;
         return "lojaU/index.xhtml";
     }
 
@@ -67,9 +69,9 @@ public class LojaUBean implements Serializable {
         return "/index.xhtml?faces-redirect=true";
     }
 
-    public List<Loja> getLojas() throws SQLException {
+    public Loja getLojas() throws SQLException {
         LojaDAO dao = new LojaDAO();
-        return dao.getAll();
+        return dao.getByEmail(mail);
     }
 
     public Loja getLoja() {

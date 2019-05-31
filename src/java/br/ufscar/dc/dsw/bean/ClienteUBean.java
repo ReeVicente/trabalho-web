@@ -19,8 +19,10 @@ public class ClienteUBean implements Serializable {
 
     private Cliente cliente;
     private Usuario usuario;
+    private String mail;
 
-    public String lista() {
+    public String lista(String mail) {
+        this.mail=mail;
         return "clienteU/index.xhtml";
     }
 
@@ -68,9 +70,9 @@ public class ClienteUBean implements Serializable {
         return "/index.xhtml?faces-redirect=true";
     }
 
-    public List<Cliente> getClientes() throws SQLException {
+    public Cliente getClientes() throws SQLException {
         ClienteDAO dao = new ClienteDAO();
-        return dao.getAll();
+        return dao.getByEmail(mail);
     }
 
     public Cliente getCliente() {

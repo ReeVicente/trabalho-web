@@ -18,8 +18,10 @@ public class AluguelLBean implements Serializable {
 
     
     private Aluguel aluguel;
+    private String mail;
     
-    public String lista() {
+    public String lista(String mail) {
+        this.mail=mail;
         return "aluguelL/index.xhtml";
     }
 
@@ -35,7 +37,7 @@ public class AluguelLBean implements Serializable {
     
     public List<Aluguel> getAlugueis() throws SQLException {
         AluguelDAO dao = new AluguelDAO();
-        return dao.getAll();
+        return dao.getNomeLoja(mail);
     }
 
     public Aluguel getAluguel() {
