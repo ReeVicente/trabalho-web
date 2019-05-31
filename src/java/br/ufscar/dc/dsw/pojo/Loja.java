@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -27,6 +28,8 @@ public class Loja implements Serializable {
     private String cnpj;
     
     private String cidade;
+    
+
     
     @OneToMany(mappedBy = "loja", fetch = FetchType.LAZY)
     private List<Aluguel> alugueis;
@@ -86,6 +89,7 @@ public class Loja implements Serializable {
     public void setAlugueis(List<Aluguel> alugueis) {
         this.alugueis = alugueis;
     }
+    
 
     @Override
     public boolean equals(Object obj) {

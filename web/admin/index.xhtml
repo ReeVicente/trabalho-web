@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>#{msg['root.page.title']}</title>
+        <link rel="stylesheet" 
+              href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
+              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" 
+              crossorigin="anonymous"/>
+        <h:outputStylesheet name="/css/estilo.css"/>
+    </h:head>
+    <h:body>
+        <h:form> 
+            <ul>
+                <li>
+                    <h:commandLink action="#{aluguelBean.lista()}">#{msg['rent.label']}: ADMONLY</h:commandLink>
+                </li>
+               
+                <li>
+                    <h:commandLink action="#{lojaBean.lista()}">#{msg['store.label']}: ADMONLY</h:commandLink>
+                </li>
+
+                <li>
+                    <h:commandLink action="#{clienteBean.lista()}">#{msg['client.label']}: ADMONLY</h:commandLink>
+                </li>
+
+            </ul>
+        </h:form>
+    </h:body> 
+</html>
+

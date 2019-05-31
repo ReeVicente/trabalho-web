@@ -1,41 +1,41 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:sec="http://www.springframework.org/security/tags">
     <h:head>
-        <title>#{msg['root.page.title']}</title>
-        <link rel="stylesheet" 
-              href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" 
-              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" 
-              crossorigin="anonymous"/>
-        <h:outputStylesheet name="/css/estilo.css"/>
+        <title>Home Page</title>
     </h:head>
     <h:body>
-        <h:form> 
-            <ul>
-                <li>
-                    <h:commandLink action="#{aluguelBean.lista()}">#{msg['rent.label']}: ADMONLY</h:commandLink>
-                </li>
-                <li>
-                    <h:commandLink action="#{aluguelUBean.lista()}">#{msg['rent.label']}: CLIENTEONLY</h:commandLink>
-                </li>
-                <li>
-                    <h:commandLink action="#{aluguelLBean.lista()}">#{msg['rent.label']}: LOJAONLY</h:commandLink>
-                </li>
-                <li>
-                    <h:commandLink action="#{lojaBean.lista()}">#{msg['store.label']}: ADMONLY</h:commandLink>
-                </li>
-                <li>
-                    <h:commandLink action="#{lojaUBean.lista()}">#{msg['store.label']}: LOJAONLY</h:commandLink>
-                </li>
-                <li>
-                    <h:commandLink action="#{clienteBean.lista()}">#{msg['client.label']}: ADMONLY</h:commandLink>
-                </li>
-                <li>
-                    <h:commandLink action="#{clienteUBean.lista()}">#{msg['client.label']}: CLIENTEONLY</h:commandLink>
-                </li>
-            </ul>
-        </h:form>
-    </h:body> 
-</html>
+        <h2>Bemvindo
+            #{request.getUserPrincipal().getName().toString()}
+        </h2>
 
+        <h:form>
+            <sec:authorize ifAllGranted="ROLE_ADMIN">
+
+                Este conteúdo só será visível para usuários que desempenhem 
+                o papel "ADMIN" <br/><br/>
+
+                <h:commandLink action="admin/index">Área de Administrador</h:commandLink>
+            
+            </sec:authorize>
+
+            <sec:authorize ifAllGranted="ROLE_CLIENTE">
+                Este conteúdo só será visível para usuários que desempenhem 
+                o papel "CLIENTE" <br/><br/>
+
+                <h:commandLink action="cliente/index">Área de Cliente</h:commandLink>
+                
+            </sec:authorize>
+            
+            <sec:authorize ifAllGranted="ROLE_LOJA">
+                Este conteúdo só será visível para usuários que desempenhem 
+                o papel "LOJA" <br/><br/>
+
+                <h:commandLink action="loja/index">Área de Loja</h:commandLink>
+                
+            </sec:authorize>
+        </h:form>
+    </h:body>
+</html>
