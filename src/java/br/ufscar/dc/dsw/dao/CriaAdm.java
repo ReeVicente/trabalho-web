@@ -27,7 +27,8 @@ public class CriaAdm {
 
         u1.getPapel().add(p1);
         usuarioDAO.update(u1);
-
+        
+       
 
     }
 }

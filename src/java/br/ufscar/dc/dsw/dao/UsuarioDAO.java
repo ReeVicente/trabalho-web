@@ -1,10 +1,12 @@
 package br.ufscar.dc.dsw.dao;
 
+import br.ufscar.dc.dsw.pojo.Cliente;
 import br.ufscar.dc.dsw.pojo.Usuario;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 public class UsuarioDAO extends GenericDAO<Usuario>{
     
@@ -54,4 +56,15 @@ public class UsuarioDAO extends GenericDAO<Usuario>{
         em.close();
         return usuario;
     }
+    
+    
+    public Usuario getByEmail(String email) {
+        EntityManager em = this.getEntityManager();
+        String sql = "SELECT e FROM Usuario e WHERE e.email = :email";
+        TypedQuery<Usuario> q = em.createQuery(sql, Usuario.class);
+        q.setParameter("email", email);
+        return q.getSingleResult();
+    }
+    
+    
 }
