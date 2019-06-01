@@ -71,4 +71,13 @@ public class LojaDAO extends GenericDAO<Loja>{
         q.setParameter("email", email);
         return q.getSingleResult();
     }
+    
+    public List<Loja> getAllPorNome(String name) {
+        EntityManager em = this.getEntityManager();
+        String s = "select p from Loja p where p.nome = :name";
+        TypedQuery<Loja> q = em.createQuery(s, Loja.class);
+        q.setParameter("nome", name);
+        return q.getResultList();
+    }
+    
 }

@@ -1,6 +1,8 @@
 package br.ufscar.dc.dsw.dao;
 
 import br.ufscar.dc.dsw.pojo.Aluguel;
+import br.ufscar.dc.dsw.pojo.Cliente;
+import br.ufscar.dc.dsw.pojo.Loja;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -44,6 +46,8 @@ public class AluguelDAO extends GenericDAO<Aluguel>{
         q.setParameter("mail", email);
         return q.getResultList();
     }
+    
+   
     
     @Override
     public void delete(Aluguel aluguel) {

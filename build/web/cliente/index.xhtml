@@ -14,10 +14,10 @@
         <h:form> 
             <ul>
                 <li>
-                    <h:commandLink action="#{aluguelUBean.lista(request.getUserPrincipal().getName().toString())}">#{msg['rent.label']}: CLIENTEONLY</h:commandLink>
+                    <h:commandLink action="#{aluguelUBean.lista(request.getUserPrincipal().getName().toString())}">#{msg['rent.label']}: Gerenciar</h:commandLink>
                 </li>
                 <li>
-                    <h:commandLink action="#{clienteUBean.lista(request.getUserPrincipal().getName().toString())}">#{msg['client.label']}: CLIENTEONLY</h:commandLink>
+                    <h:commandLink action="#{clienteUBean.lista(request.getUserPrincipal().getName().toString())}">#{msg['client.label']}: Gerenciar</h:commandLink>
                 </li>
             </ul>
         </h:form>

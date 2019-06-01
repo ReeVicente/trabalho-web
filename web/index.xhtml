@@ -14,8 +14,7 @@
         <h:form>
             <sec:authorize ifAllGranted="ROLE_ADMIN">
 
-                Este conteúdo só será visível para usuários que desempenhem 
-                o papel "ADMIN" <br/><br/>
+                Aqui você gerencia todos os clientes, lojas e locações <br/><br/>
 
                 <h:commandLink action="admin/index">Área de Administrador</h:commandLink>
                 <a class="nav-link" href="/Locadora/logout">  logout</a>
@@ -23,8 +22,7 @@
             </sec:authorize>
 
             <sec:authorize ifAllGranted="ROLE_CLIENTE">
-                Este conteúdo só será visível para usuários que desempenhem 
-                o papel "CLIENTE" <br/><br/>
+                Gerencie suas locações e seus dados pessoais aqui! <br/><br/>
 
                 <h:commandLink action="cliente/index">Área de Cliente</h:commandLink>
                 <a class="nav-link" href="/Locadora/logout">  logout</a>
@@ -32,8 +30,7 @@
             </sec:authorize>
             
             <sec:authorize ifAllGranted="ROLE_LOJA">
-                Este conteúdo só será visível para usuários que desempenhem 
-                o papel "LOJA" <br/><br/>
+                Gerencie suas locações e seus dados pessoais aqui! <br/><br/>
 
                 <h:commandLink action="loja/index">Área de Loja</h:commandLink>
                 <a class="nav-link" href="/Locadora/logout">  logout</a>
